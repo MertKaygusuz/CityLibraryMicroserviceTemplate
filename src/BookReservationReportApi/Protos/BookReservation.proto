@@ -1,0 +1,34 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+option csharp_namespace = "BookReservationReturn";
+
+service GrpcBookReservation {
+    rpc ReturnBook (GrpcActiveBookReservationModel) returns (google.protobuf.Empty);
+}
+
+message GrpcActiveBookReservationModel {
+    string UserId = 1;
+    GrpcUserModel User = 2;
+    int32 BookId = 3;
+    GrpcBookModel Book = 4;
+}
+
+message GrpcUserModel {
+    string UserId = 1;
+    string UserName = 2;
+    string FullName = 3;
+    google.protobuf.Timestamp BirthDate = 4;
+    string Address = 5;
+}
+
+message GrpcBookModel {
+    int32 BookId = 1;
+    string Author = 2;
+    string BookTitle = 3;
+    google.protobuf.Timestamp FirstPublishDate = 4;
+    int32 EditionNumber = 5;
+    google.protobuf.Timestamp EditionDate = 6;
+    int32 TitleType = 7;
+    int32 CoverType = 8;
+}
