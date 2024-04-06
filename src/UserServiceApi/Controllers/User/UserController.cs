@@ -30,7 +30,7 @@ namespace UserServiceApi.Controllers.User
         [HttpPut]
         [ServiceFilter(typeof(GenericNotFoundFilter<IUserService>))]
         [Authorize(Roles = "Admin")]
-        public async Task AdminUpdateUser(RegistrationDto dto)
+        public async Task AdminUpdateUser(AdminUserUpdateDto dto)
         {
             await _userService.AdminUpdateUserAsync(dto);
         }

@@ -27,6 +27,6 @@ namespace UserServiceApi.Services.User.Interfaces
         /// </summary>
         /// <param name="registrationDto">Includes UserName and update parameters. UserName could not be updated.</param>
         /// <returns></returns>
-        Task AdminUpdateUserAsync(RegistrationDto registrationDto);
+        Task AdminUpdateUserAsync(AdminUserUpdateDto updateDto);
     }
 }

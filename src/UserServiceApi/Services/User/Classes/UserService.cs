@@ -83,21 +83,21 @@ namespace UserServiceApi.Services.User.Classes
             if (string.IsNullOrEmpty(myUserId) || !await _usersRepo.DoesEntityExistAsync(myUserId))
                 throw new CustomBusinessException(_localizer["User_Not_Found"]);
 
-            var registrationDto = _mapper.Map<UserSelfUpdateDto, RegistrationDto>(selfUpdateDto);
-            registrationDto.UserId = myUserId;
-            await AdminUpdateUserAsync(registrationDto);
+            var updateDto = _mapper.Map<UserSelfUpdateDto, AdminUserUpdateDto>(selfUpdateDto);
+            updateDto.UserId = myUserId;
+            await AdminUpdateUserAsync(updateDto);
         }
 
-        public async Task AdminUpdateUserAsync(RegistrationDto registrationDto)
+        public async Task AdminUpdateUserAsync(AdminUserUpdateDto updateDto)
         {
-            Users theUser = await _usersRepo.GetByIdAsync(registrationDto.UserId);
-            theUser.FullName = registrationDto.FullName;
-            theUser.BirthDate = registrationDto.BirthDate;
-            theUser.Address = registrationDto.Address;
-            registrationDto.Password.CreatePasswordHash(out string hashedPass);
+            Users theUser = await _usersRepo.GetByIdAsync(updateDto.UserId);
+            theUser.FullName = updateDto.FullName;
+            theUser.BirthDate = updateDto.BirthDate;
+            theUser.Address = updateDto.Address;
+            updateDto.Password.CreatePasswordHash(out string hashedPass);
             theUser.Password = hashedPass;
 
-            await _publishEndpoint.Publish(_mapper.Map<RegistrationDto, UserUpdated>(registrationDto));
+            await _publishEndpoint.Publish(_mapper.Map<Users, UserUpdated>(theUser));
 
             await _unitOfWork.CommitAsync();
         }

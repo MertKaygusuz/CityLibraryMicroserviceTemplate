@@ -11,13 +11,13 @@ namespace BookReservationReportApi.Repositories.ActiveBookReservations
         public async Task UpdateBookPartAsync(BookModel model)
         {
             var activeReservationFilter = Builders<Entities.ActiveBookReservations>.Filter.Where(x => x.IsDeleted != true && x.BookId == model.BookId);
-            await UpdateAsync(activeReservationFilter, Builders<Entities.ActiveBookReservations>.Update.Set(x => x.Book, model).OnUpdate());
+            await UpdateManyAsync(activeReservationFilter, Builders<Entities.ActiveBookReservations>.Update.Set(x => x.Book, model).OnUpdate());
         }
 
         public async Task UpdateUserPartAsync(UserModel model)
         {
             var activeReservationFilter = Builders<Entities.ActiveBookReservations>.Filter.Where(x => x.IsDeleted != true && x.UserId == model.UserId);
-            await UpdateAsync(activeReservationFilter, Builders<Entities.ActiveBookReservations>.Update.Set(x => x.User, model).OnUpdate());
+            await UpdateManyAsync(activeReservationFilter, Builders<Entities.ActiveBookReservations>.Update.Set(x => x.User, model).OnUpdate());
         }
     }
 }
