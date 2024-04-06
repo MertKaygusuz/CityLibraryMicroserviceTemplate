@@ -7,6 +7,8 @@
         public string DbConnectionString { get; set; }
 
         public RedisConnection RedisConnection { get; set; }
+
+        public RabbitMq RabbitMqOptions { get; set; }
     }
 
     public class TokenOptions
@@ -25,5 +27,13 @@
         public string ConnectionString { get; set; }
 
         public string InstanceName { get; set; }
+    }
+
+    public class RabbitMq
+    {
+        public string Host { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string UserCreatedSenderUri { get; set; }
     }
 }

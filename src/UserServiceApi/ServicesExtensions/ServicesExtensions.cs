@@ -15,6 +15,7 @@ using UserServiceApi.Repositories.Base;
 using CityLibrary.Shared.SwaggerRelated;
 using UserServiceApi.ActionFilters.Base;
 using UserServiceApi.UnitOfWorks;
+using MassTransit;
 
 namespace UserServiceApi.ServicesExtensions
 {
@@ -136,6 +137,31 @@ namespace UserServiceApi.ServicesExtensions
                 {
                     new AcceptLanguageHeaderRequestCultureProvider()
                 };
+            });
+        }
+
+        public static void AddRabbitMqMassTransitConfiguration(this IServiceCollection services, RabbitMq rabbitMqOptions)
+        {
+            services.AddMassTransit(x =>
+            {
+                x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("user-service", false));
+
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.UseMessageRetry(r =>
+                    {
+                        r.Handle<RabbitMqConnectionException>();
+                        r.Interval(5, TimeSpan.FromSeconds(10));
+                    });
+
+                    cfg.Host(rabbitMqOptions.Host, "/", host =>
+                    {
+                        host.Username(rabbitMqOptions.UserName);
+                        host.Password(rabbitMqOptions.Password);
+                    });
+
+                    cfg.ConfigureEndpoints(context);
+                });
             });
         }
     }

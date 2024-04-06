@@ -6,7 +6,9 @@ namespace CityLibrary.Shared.Extensions.TokenExtensions
     {
         public static string GetMyUserId()
         {
-            return GlobalHttpContext._contextAccessor.HttpContext!.User.Claims.Where(x => x.Type == ClaimTypes.Sid)
+            if (GlobalHttpContext._contextAccessor?.HttpContext?.User is null) 
+                return null;
+            return GlobalHttpContext._contextAccessor.HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Sid)
                                                                              .Select(x => x.Value)
                                                                              .FirstOrDefault();
         }

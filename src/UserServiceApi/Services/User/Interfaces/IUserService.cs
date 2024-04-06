@@ -12,7 +12,7 @@ namespace UserServiceApi.Services.User.Interfaces
         /// Registers new user
         /// </summary>
         /// <param name="registrationDto"></param>
-        /// <returns>User name</returns>
+        /// <returns>User Id</returns>
         Task<string> RegisterAsync(RegistrationDto registrationDto);
 
         /// <summary>

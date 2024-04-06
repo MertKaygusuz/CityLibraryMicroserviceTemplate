@@ -18,6 +18,8 @@ using BookServiceApi.UnitOfWorks;
 using Refit;
 using BookServiceApi.Services.BookReservationApiService;
 using System.Text.Json;
+using MassTransit;
+using BookServiceApi.Consumers;
 
 namespace BookServiceApi.ServicesExtensions
 {
@@ -177,6 +179,38 @@ namespace BookServiceApi.ServicesExtensions
                     {
                         ContentSerializer = new SystemTextJsonContentSerializer(options)
                     }));
+        }
+
+        public static void AddRabbitMqMassTransitConfiguration(this IServiceCollection services, RabbitMq rabbitMqOptions)
+        {
+            services.AddMassTransit(x =>
+            {
+                x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("book-service", false));
+
+                x.AddConsumersFromNamespaceContaining<UserUpdatedEventConsumer>();
+
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.UseMessageRetry(r =>
+                    {
+                        r.Handle<RabbitMqConnectionException>();
+                        r.Interval(5, TimeSpan.FromSeconds(10));
+                    });
+
+                    cfg.Host(rabbitMqOptions.Host, "/", host =>
+                    {
+                        host.Username(rabbitMqOptions.UserName);
+                        host.Password(rabbitMqOptions.Password);
+                    });
+
+                    cfg.ReceiveEndpoint(rabbitMqOptions.UserCreatedConsumerUri, e =>
+                    {
+                        e.ConfigureConsumer<UserCreatedCommandConsumer>(context);
+                    });
+
+                    cfg.ConfigureEndpoints(context);
+                });
+            });
         }
     }
 }

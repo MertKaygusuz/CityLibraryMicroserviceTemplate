@@ -1,6 +1,4 @@
-﻿
-
-namespace UserServiceApi.Dtos.User
+﻿namespace UserServiceApi.Dtos.User
 {
     public class UserSelfUpdateDto
     {

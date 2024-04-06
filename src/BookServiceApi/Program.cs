@@ -27,6 +27,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<AppSetting>();
 
 builder.Services.AddRangeCustomServices(appSetting);
+builder.Services.AddRabbitMqMassTransitConfiguration(appSetting.RabbitMqOptions);
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;

@@ -16,6 +16,8 @@ using BookReservationReturn;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core.Interceptors;
 using BookServiceApi.Interceptors;
+using MassTransit;
+using CityLibrary.Shared.SharedModels.QueueModels;
 
 namespace BookServiceApi.Services.Book.Classes
 {
@@ -28,12 +30,14 @@ namespace BookServiceApi.Services.Book.Classes
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IBookReservationRecordApi _bookReservationRecordApi;
         private readonly IOptions<AppSetting> _options;
+        private readonly ISendEndpointProvider _sendEndpointProvider;
 
         public BookService(IBooksRepo booksRepo, 
                            IUnitOfWork unitOfWork,
                            IUsersRepo usersRepo,
                            ICustomMapper customMapper,
                            IOptions<AppSetting> options,
+                           ISendEndpointProvider sendEndpointProvider,
                            IBookReservationRecordApi bookReservationRecordApi,
                            IHttpContextAccessor httpContextAccessor)
         {
@@ -44,6 +48,7 @@ namespace BookServiceApi.Services.Book.Classes
             _httpContextAccessor = httpContextAccessor;
             _bookReservationRecordApi = bookReservationRecordApi;
             _options = options;
+            _sendEndpointProvider = sendEndpointProvider;
         }
 
         public async Task<int> BookRegisterAsync(RegisterBookDto dto)
@@ -84,6 +89,10 @@ namespace BookServiceApi.Services.Book.Classes
         {
             var existingBook = await _booksRepo.GetByIdAsync(dto.BookId);
             _mapper.MapToExistingObject(dto, existingBook);
+
+            var sendEndpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri(_options.Value.RabbitMqOptions.BookUpdatedSenderUri));
+            await sendEndpoint.Send(_mapper.Map<UpdateBookDto, BookUpdated>(dto));
+
             await _unitOfWork.CommitAsync();
         }
 

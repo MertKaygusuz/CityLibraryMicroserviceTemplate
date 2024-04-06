@@ -10,6 +10,10 @@ using UserServiceApi.Extensions;
 using UserServiceApi.Repositories;
 using UserServiceApi.Resources;
 using UserServiceApi.Services.User.Interfaces;
+using MassTransit;
+using CityLibrary.Shared.SharedModels.QueueModels;
+using UserServiceApi.AppSettings;
+using Microsoft.Extensions.Options;
 
 namespace UserServiceApi.Services.User.Classes
 {
@@ -19,19 +23,28 @@ namespace UserServiceApi.Services.User.Classes
         private readonly IRolesRepo _rolesRepo;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICustomMapper _mapper;
+        private readonly IPublishEndpoint _publishEndpoint;
+        private readonly ISendEndpointProvider _sendEndpointProvider;
+        private readonly IOptions<AppSetting> _options;
         private readonly IStringLocalizer<ExceptionsResource> _localizer;
-        private readonly HashSet<string> _defaultUserRoleNames = new() { "User" };
+        private readonly HashSet<string> _defaultUserRoleNames = ["User"];
         public UserService(IUsersRepo usersRepo, 
-                             IRolesRepo rolesRepo,
-                             IStringLocalizer<ExceptionsResource> localizer,
-                             IUnitOfWork unitOfWork, 
-                             ICustomMapper mapper)
+                           IRolesRepo rolesRepo,
+                           IStringLocalizer<ExceptionsResource> localizer,
+                           IUnitOfWork unitOfWork,
+                           IOptions<AppSetting> options,
+                           ISendEndpointProvider sendEndpointProvider,
+                           IPublishEndpoint publishEndpoint,
+                           ICustomMapper mapper)
         {
             _usersRepo = usersRepo;
             _rolesRepo = rolesRepo;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _localizer = localizer;
+            _publishEndpoint = publishEndpoint;
+            _options = options;
+            _sendEndpointProvider = sendEndpointProvider;
         }
         public async Task<Users> GetUserByUserNameAsync(string userName)
         {
@@ -51,9 +64,12 @@ namespace UserServiceApi.Services.User.Classes
 
             await _usersRepo.InsertAsync(newUser);
 
+            var sendEndpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri(_options.Value.RabbitMqOptions.UserCreatedSenderUri));
+            await sendEndpoint.Send(_mapper.Map<Users, UserCreated>(newUser));
+
             await _unitOfWork.CommitAsync();
 
-            return newUser.UserName;
+            return newUser.UserId;
         }
 
         public async Task<bool> DoesEntityExistAsync(IConvertible id)
@@ -80,6 +96,8 @@ namespace UserServiceApi.Services.User.Classes
             theUser.Address = registrationDto.Address;
             registrationDto.Password.CreatePasswordHash(out string hashedPass);
             theUser.Password = hashedPass;
+
+            await _publishEndpoint.Publish(_mapper.Map<RegistrationDto, UserUpdated>(registrationDto));
 
             await _unitOfWork.CommitAsync();
         }

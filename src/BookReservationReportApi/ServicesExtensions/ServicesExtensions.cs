@@ -15,6 +15,8 @@ using MongoDB.Bson;
 using CityLibrary.Shared.MapperConfigurations;
 using CityLibrary.Shared.DbBase.Mongo;
 using BookReservationReportApi.Repositories.Base;
+using MassTransit;
+using BookReservationReportApi.Consumers;
 
 namespace BookReservationReportApi.ServicesExtensions
 {
@@ -140,6 +142,38 @@ namespace BookReservationReportApi.ServicesExtensions
                 [
                     new AcceptLanguageHeaderRequestCultureProvider()
                 ];
+            });
+        }
+
+        public static void AddRabbitMqMassTransitConfiguration(this IServiceCollection services, RabbitMq rabbitMqOptions)
+        {
+            services.AddMassTransit(x =>
+            {
+                x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("book-reservation-service", false));
+
+                x.AddConsumersFromNamespaceContaining<UserUpdatedEventConsumer>();
+
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.UseMessageRetry(r =>
+                    {
+                        r.Handle<RabbitMqConnectionException>();
+                        r.Interval(5, TimeSpan.FromSeconds(10));
+                    });
+
+                    cfg.Host(rabbitMqOptions.Host, "/", host =>
+                    {
+                        host.Username(rabbitMqOptions.UserName);
+                        host.Password(rabbitMqOptions.Password);
+                    });
+
+                    cfg.ReceiveEndpoint(rabbitMqOptions.BookUpdatedConsumerUri, e =>
+                    {
+                        e.ConfigureConsumer<BookUpdatedCommandConsumer>(context);
+                    });
+
+                    cfg.ConfigureEndpoints(context);
+                });
             });
         }
     }
