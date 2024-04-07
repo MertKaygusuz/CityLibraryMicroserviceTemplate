@@ -24,7 +24,7 @@ namespace BookServiceApi.Services.Book.Classes
     public class BookService : IBookService
     {
         private readonly IBooksRepo _booksRepo;
-        private readonly IUsersRepo _usersRepo;
+        private readonly Lazy<IUsersRepo> _usersRepo;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICustomMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -34,7 +34,7 @@ namespace BookServiceApi.Services.Book.Classes
 
         public BookService(IBooksRepo booksRepo, 
                            IUnitOfWork unitOfWork,
-                           IUsersRepo usersRepo,
+                           Lazy<IUsersRepo> usersRepo,
                            ICustomMapper customMapper,
                            IOptions<AppSetting> options,
                            ISendEndpointProvider sendEndpointProvider,
@@ -105,9 +105,8 @@ namespace BookServiceApi.Services.Book.Classes
             string authHeader = _httpContextAccessor.HttpContext.Request.Headers.Authorization;
             string langHeader = _httpContextAccessor.HttpContext.Request.Headers.AcceptLanguage;
 
-            var theUser = await _usersRepo.GetByIdAsync(dto.UserId);
+            var theUser = await _usersRepo.Value.GetByIdAsync(dto.UserId);
 
-            // TODO: check type validation for userid in fluent validation step
             var reservationModel = new ActiveBookReservationModel()
             {
                 BookId = dto.BookId,
@@ -142,7 +141,7 @@ namespace BookServiceApi.Services.Book.Classes
             bookRecord.ReservedCount -= 1;
             bookRecord.AvailableCount += 1;
 
-            var userRecord = await _usersRepo.GetByIdAsync(dto.UserId);
+            var userRecord = await _usersRepo.Value.GetByIdAsync(dto.UserId);
 
             using var channel = GrpcChannel.ForAddress(_options.Value.BookReservationGrpcEndPoint);
             var invoker = channel.Intercept(new GrpcHeadersInterceptor(_httpContextAccessor));

@@ -20,6 +20,7 @@ using BookServiceApi.Services.BookReservationApiService;
 using System.Text.Json;
 using MassTransit;
 using BookServiceApi.Consumers;
+using BookServiceApi.Repositories.User;
 
 namespace BookServiceApi.ServicesExtensions
 {
@@ -58,6 +59,8 @@ namespace BookServiceApi.ServicesExtensions
               .AsPublicImplementedInterfaces(ServiceLifetime.Scoped);
 
             services.AddTransientServices(assembliesToScan);
+
+            services.AddScoped(x => new Lazy<IUsersRepo>(x.GetService<IUsersRepo>));
         }
 
         private static void AddTransientServices(this IServiceCollection services, Assembly[] assembliesToScan)
