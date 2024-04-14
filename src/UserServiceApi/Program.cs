@@ -45,7 +45,7 @@ builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
-GenerateAndVerifyPasswords.Localizer =
+GeneratePasswords.Localizer =
     app.Services.GetService<IStringLocalizer<ExceptionsResource>>();
 
 if (app.Environment.IsDevelopment())

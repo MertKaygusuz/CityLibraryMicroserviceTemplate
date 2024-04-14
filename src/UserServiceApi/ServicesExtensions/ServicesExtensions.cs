@@ -16,6 +16,7 @@ using CityLibrary.Shared.SwaggerRelated;
 using UserServiceApi.ActionFilters.Base;
 using UserServiceApi.UnitOfWorks;
 using MassTransit;
+using UserServiceApi.Helpers;
 
 namespace UserServiceApi.ServicesExtensions
 {
@@ -34,6 +35,7 @@ namespace UserServiceApi.ServicesExtensions
             });
 
             services.AddSingleton<ICustomMapper, MapsterMapping>();
+            services.AddSingleton<IVerifyPasswords, VerifyPasswords>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddStackExchangeRedisCache(options =>

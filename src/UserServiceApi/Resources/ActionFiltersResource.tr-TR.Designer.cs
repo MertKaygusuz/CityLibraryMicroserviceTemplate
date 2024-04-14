@@ -50,5 +50,11 @@ namespace UserServiceApi.Resources {
                 return ResourceManager.GetString("User_Name_Not_Exist", resourceCulture);
             }
         }
+        
+        internal static string User_Name_Already_Taken {
+            get {
+                return ResourceManager.GetString("User_Name_Already_Taken", resourceCulture);
+            }
+        }
     }
 }

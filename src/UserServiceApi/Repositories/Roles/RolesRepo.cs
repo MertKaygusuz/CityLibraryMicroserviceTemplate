@@ -8,11 +8,12 @@ namespace UserServiceApi.Repositories
 {
     public class RolesRepo(AppDbContext dbContext) : BaseRepo<Roles, int>(dbContext), IRolesRepo
     {
-        public LocalView<Roles> GetLocalViewWithLinqExp(Expression<Func<Roles, bool>> whereClause)
+        public void SetUserRolesWithLinqExp(Users user, Expression<Func<Roles, bool>> whereClause)
         {
             var roles = GetDataWithLinqExp(whereClause);
             _dbcontext.Roles.AttachRange(roles);
-            return _dbcontext.Roles.Local;
+            var localRoles = _dbcontext.Roles.Local;
+            user.Roles = [.. localRoles];
         }
     }
 }

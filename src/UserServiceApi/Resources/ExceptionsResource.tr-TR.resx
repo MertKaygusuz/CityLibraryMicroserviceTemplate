@@ -27,4 +27,13 @@
     <data name="User_Not_Found" xml:space="preserve">
         <value>Kullanıcı bulunamadı. Sisteme giriş yaptığınızdan emin olunuz.</value>
     </data>
+    <data name="Password_Null" xml:space="preserve">
+        <value>Parola alanı boş bırakılamaz.</value>
+    </data>
+    <data name="Password_Space" xml:space="preserve">
+        <value>Parola boşluk karakteri içeremez.</value>
+    </data>
+    <data name="Password_Min_Length" xml:space="preserve">
+        <value>Parola en az {0} karakterden oluşmalıdır.</value>
+    </data>
 </root>

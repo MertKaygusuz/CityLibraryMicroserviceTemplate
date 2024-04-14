@@ -17,11 +17,11 @@ namespace UserServiceApi.ActionFilters.Classes
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             RegistrationDto modelVal = context.ActionArguments["dto"] as RegistrationDto;
-            bool doesExist = await _userService.DoesEntityExistAsync(modelVal!.UserName);
+            bool doesExist = await _userService.CheckIfExistWithUserNameAsync(modelVal!.UserName);
             if (doesExist)
             {
                 var err = new ErrorDto();
-                err.Errors.Add(nameof(modelVal.UserName), [string.Format(_localizer["User_Name_Check"], modelVal.UserName)]);
+                err.Errors.Add(nameof(modelVal.UserName), [string.Format(_localizer["User_Name_Already_Taken"], modelVal.UserName)]);
                 context.Result = new ObjectResult(err)
                 {
                     StatusCode = err.Status

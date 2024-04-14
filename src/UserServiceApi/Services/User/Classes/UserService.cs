@@ -14,6 +14,7 @@ using MassTransit;
 using CityLibrary.Shared.SharedModels.QueueModels;
 using UserServiceApi.AppSettings;
 using Microsoft.Extensions.Options;
+using System.Security.Claims;
 
 namespace UserServiceApi.Services.User.Classes
 {
@@ -27,7 +28,11 @@ namespace UserServiceApi.Services.User.Classes
         private readonly ISendEndpointProvider _sendEndpointProvider;
         private readonly IOptions<AppSetting> _options;
         private readonly IStringLocalizer<ExceptionsResource> _localizer;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly HashSet<string> _defaultUserRoleNames = ["User"];
+        // used for unit test structure
+        public virtual Func<AdminUserUpdateDto, Task> AdminUpdateUserFunc {get; set;}
+
         public UserService(IUsersRepo usersRepo, 
                            IRolesRepo rolesRepo,
                            IStringLocalizer<ExceptionsResource> localizer,
@@ -35,7 +40,8 @@ namespace UserServiceApi.Services.User.Classes
                            IOptions<AppSetting> options,
                            ISendEndpointProvider sendEndpointProvider,
                            IPublishEndpoint publishEndpoint,
-                           ICustomMapper mapper)
+                           ICustomMapper mapper,
+                           IHttpContextAccessor httpContextAccessor)
         {
             _usersRepo = usersRepo;
             _rolesRepo = rolesRepo;
@@ -45,6 +51,8 @@ namespace UserServiceApi.Services.User.Classes
             _publishEndpoint = publishEndpoint;
             _options = options;
             _sendEndpointProvider = sendEndpointProvider;
+            _httpContextAccessor = httpContextAccessor;
+            AdminUpdateUserFunc = AdminUpdateUserAsync;
         }
         public async Task<Users> GetUserByUserNameAsync(string userName)
         {
@@ -59,8 +67,7 @@ namespace UserServiceApi.Services.User.Classes
             newUser.Password = hashedPass;
             newUser.UserId = Guid.NewGuid().ToString();
 
-            var roles = _rolesRepo.GetLocalViewWithLinqExp(x => _defaultUserRoleNames.Contains(x.RoleName));
-            newUser.Roles = [.. roles];
+            _rolesRepo.SetUserRolesWithLinqExp(newUser ,x => _defaultUserRoleNames.Contains(x.RoleName));
 
             await _usersRepo.InsertAsync(newUser);
 
@@ -79,16 +86,18 @@ namespace UserServiceApi.Services.User.Classes
 
         public async Task UserSelfUpdateAsync(UserSelfUpdateDto selfUpdateDto)
         {
-            string myUserId = GetMyUserId();
+            string myUserId = _httpContextAccessor?.HttpContext?.User.Claims.Where(x => x.Type == ClaimTypes.Sid)
+                                                                            .Select(x => x.Value)
+                                                                            .FirstOrDefault();
             if (string.IsNullOrEmpty(myUserId) || !await _usersRepo.DoesEntityExistAsync(myUserId))
                 throw new CustomBusinessException(_localizer["User_Not_Found"]);
 
             var updateDto = _mapper.Map<UserSelfUpdateDto, AdminUserUpdateDto>(selfUpdateDto);
             updateDto.UserId = myUserId;
-            await AdminUpdateUserAsync(updateDto);
+            await AdminUpdateUserFunc(updateDto);
         }
 
-        public async Task AdminUpdateUserAsync(AdminUserUpdateDto updateDto)
+        public virtual async Task AdminUpdateUserAsync(AdminUserUpdateDto updateDto)
         {
             Users theUser = await _usersRepo.GetByIdAsync(updateDto.UserId);
             theUser.FullName = updateDto.FullName;
@@ -100,6 +109,11 @@ namespace UserServiceApi.Services.User.Classes
             await _publishEndpoint.Publish(_mapper.Map<Users, UserUpdated>(theUser));
 
             await _unitOfWork.CommitAsync();
+        }
+
+        public async Task<bool> CheckIfExistWithUserNameAsync(string userName)
+        {
+            return await _usersRepo.GetDataWithLinqExp(x => x.UserName == userName).AnyAsync();
         }
     }
 }

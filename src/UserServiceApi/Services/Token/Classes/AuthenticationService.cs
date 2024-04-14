@@ -5,6 +5,7 @@ using UserServiceApi.Dtos.Token;
 using UserServiceApi.Dtos.Token.Records;
 using UserServiceApi.Entities.Cache;
 using UserServiceApi.Extensions;
+using UserServiceApi.Helpers;
 using UserServiceApi.Resources;
 using UserServiceApi.Services.Token.Interfaces;
 using UserServiceApi.Services.User.Interfaces;
@@ -16,18 +17,20 @@ namespace UserServiceApi.Services.Token.Classes
         IStringLocalizer<ExceptionsResource> localizer,
         IUserService userService,
         IRefreshTokenService refreshTokenService,
-        IAccessTokenService accessTokenService) : IAuthenticationService
+        IAccessTokenService accessTokenService,
+        IVerifyPasswords verifyPasswords) : IAuthenticationService
     {
         private readonly ILogger _logger = logger;
         private readonly IRefreshTokenService _refreshTokenService = refreshTokenService;
         private readonly IAccessTokenService _accessTokenService = accessTokenService;
         private readonly IUserService _userService = userService;
         private readonly IStringLocalizer<ExceptionsResource> _localizer = localizer;
+        private readonly IVerifyPasswords _verifyPasswords = verifyPasswords;
 
         public async Task<ReturnTokenRecord> LoginAsync(LoginDto loginDto)
         {
             var user = await _userService.GetUserByUserNameAsync(loginDto.UserName);
-            if (user is null || loginDto.Password.VerifyPasswordHash(user.Password) is false)
+            if (user is null || _verifyPasswords.VerifyPasswordHash(loginDto.Password, user.Password, _localizer) is false)
                 throw new CustomBusinessException(_localizer["Login_Failed"]);
 
             CreateTokenDto createTokenDto = new()
@@ -71,10 +74,9 @@ namespace UserServiceApi.Services.Token.Classes
             if (oldToken is null)
                 throw new CustomBusinessException("Refresh token could not be found!");
 
-            if (DateTime.Compare(DateTime.Now, oldToken.DueTime) > 1)
+            if (DateTime.Compare(DateTime.Now, oldToken.DueTime) > 0)
                 throw new CustomStatusException(_localizer["Session_Timeout"], 401);
             
-
             CreateTokenDto createTokenDto = new()
             {
                 UserId = oldToken.UserId,

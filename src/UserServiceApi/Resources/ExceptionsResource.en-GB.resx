@@ -27,4 +27,13 @@
     <data name="User_Not_Found" xml:space="preserve">
         <value>User could not be found. Ensure that you are loged in.</value>
     </data>
+    <data name="Password_Null" xml:space="preserve">
+        <value>Password could not be null.</value>
+    </data>
+    <data name="Password_Space" xml:space="preserve">
+        <value>Password must not contain space character.</value>
+    </data>
+    <data name="Password_Min_Length" xml:space="preserve">
+        <value>Your password must compose of minimum {0} characters.</value>
+    </data>
 </root>

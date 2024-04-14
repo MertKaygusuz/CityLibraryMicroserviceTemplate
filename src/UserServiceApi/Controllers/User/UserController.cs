@@ -30,15 +30,19 @@ namespace UserServiceApi.Controllers.User
         [HttpPut]
         [ServiceFilter(typeof(GenericNotFoundFilter<IUserService>))]
         [Authorize(Roles = "Admin")]
-        public async Task AdminUpdateUser(AdminUserUpdateDto dto)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult> AdminUpdateUser(AdminUserUpdateDto dto)
         {
             await _userService.AdminUpdateUserAsync(dto);
+            return NoContent();
         }
 
         [HttpPut]
-        public async Task UserSelfUpdate(UserSelfUpdateDto dto)
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult> UserSelfUpdate(UserSelfUpdateDto dto)
         {
             await _userService.UserSelfUpdateAsync(dto);
+            return NoContent();
         }
     }
 }

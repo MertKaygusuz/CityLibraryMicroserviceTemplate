@@ -62,5 +62,23 @@ namespace UserServiceApi.Resources {
                 return ResourceManager.GetString("User_Not_Found", resourceCulture);
             }
         }
+        
+        internal static string Password_Null {
+            get {
+                return ResourceManager.GetString("Password_Null", resourceCulture);
+            }
+        }
+        
+        internal static string Password_Space {
+            get {
+                return ResourceManager.GetString("Password_Space", resourceCulture);
+            }
+        }
+        
+        internal static string Password_Min_Length {
+            get {
+                return ResourceManager.GetString("Password_Min_Length", resourceCulture);
+            }
+        }
     }
 }

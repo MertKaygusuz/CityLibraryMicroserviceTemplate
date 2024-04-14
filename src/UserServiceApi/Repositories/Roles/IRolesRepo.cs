@@ -7,6 +7,6 @@ namespace UserServiceApi.Repositories
 {
     public interface IRolesRepo : IBaseRepo<Roles, int>
     {
-        LocalView<Roles> GetLocalViewWithLinqExp(Expression<Func<Roles, bool>> whereClause);
+        void SetUserRolesWithLinqExp(Users user, Expression<Func<Roles, bool>> whereClause);
     }
 }

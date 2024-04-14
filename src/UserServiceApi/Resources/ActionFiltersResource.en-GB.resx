@@ -21,4 +21,7 @@
     <data name="User_Name_Not_Exist" xml:space="preserve">
         <value>User name does not exist on system.</value>
     </data>
+    <data name="User_Name_Already_Taken" xml:space="preserve">
+        <value>This user name has been already taken.</value>
+    </data>
 </root>
