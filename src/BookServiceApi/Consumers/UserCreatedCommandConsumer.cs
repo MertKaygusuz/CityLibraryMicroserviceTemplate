@@ -15,7 +15,7 @@ namespace BookServiceApi.Consumers
 
         public async Task Consume(ConsumeContext<UserCreated> context)
         {
-            Users newUser = _mapper.Map<UserCreated, Users>(context.Message);
+            User newUser = _mapper.Map<UserCreated, User>(context.Message);
             await _usersRepo.InsertAsync(newUser);
             await _unitOfWork.CommitAsync();
         }

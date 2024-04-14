@@ -4,7 +4,7 @@ using UserServiceApi.Repositories.Base;
 
 namespace UserServiceApi.Repositories
 {
-    public class UserRolesRepo(AppDbContext dbContext) : BaseRepo<UserRoles, int>(dbContext), IUserRolesRepo
+    public class UserRolesRepo(AppDbContext dbContext) : BaseRepo<UserRole, int>(dbContext), IUserRolesRepo
     {
     }
 }

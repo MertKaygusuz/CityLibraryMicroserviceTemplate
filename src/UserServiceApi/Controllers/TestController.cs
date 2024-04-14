@@ -29,7 +29,7 @@ namespace UserServiceApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Users>> GetAllUsers()
+        public async Task<IEnumerable<Entities.User>> GetAllUsers()
         {
             return await _usersRepo.GetData().Include(x => x.UserRoles)
                 .Include(x => x.Roles)
@@ -37,7 +37,7 @@ namespace UserServiceApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Roles>> GetAllRoles()
+        public async Task<IEnumerable<Role>> GetAllRoles()
         {
             return await _rolesRepo.GetData().Include(a => a.UserRoles).Include(x => x.Users).IgnoreQueryFilters().ToListAsync();
         }

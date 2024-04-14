@@ -53,7 +53,7 @@ namespace BookServiceApi.Services.Book.Classes
 
         public async Task<int> BookRegisterAsync(RegisterBookDto dto)
         {
-            var bookToAdd = _mapper.Map<RegisterBookDto, Books>(dto);
+            var bookToAdd = _mapper.Map<RegisterBookDto, Entities.Book>(dto);
             await _booksRepo.InsertAsync(bookToAdd);
             await _unitOfWork.CommitAsync();
             return bookToAdd.BookId;
@@ -70,7 +70,7 @@ namespace BookServiceApi.Services.Book.Classes
             return await _booksRepo.DoesEntityExistAsync((int)Id);
         }
 
-        public async Task<IEnumerable<Books>> GetAllBooks()
+        public async Task<IEnumerable<Entities.Book>> GetAllBooks()
         {
             return await _booksRepo.GetData().OrderBy(x => x.BookTitle).ToListAsync();
         }
@@ -112,8 +112,8 @@ namespace BookServiceApi.Services.Book.Classes
                 BookId = dto.BookId,
                 UserId = dto.UserId,
                 DeliveryDateToUser = DateTime.UtcNow,
-                Book = _mapper.Map<Books, BookModel>(theBook),
-                User = _mapper.Map<Users, UserModel>(theUser)
+                Book = _mapper.Map<Entities.Book, BookModel>(theBook),
+                User = _mapper.Map<Entities.User, UserModel>(theUser)
             };
 
             await _bookReservationRecordApi.CreateReservation(authHeader, langHeader, reservationModel);

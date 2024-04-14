@@ -5,8 +5,8 @@ using CityLibrary.Shared.DbBase.SQL;
 
 namespace UserServiceApi.Repositories
 {
-    public interface IRolesRepo : IBaseRepo<Roles, int>
+    public interface IRolesRepo : IBaseRepo<Role, int>
     {
-        void SetUserRolesWithLinqExp(Users user, Expression<Func<Roles, bool>> whereClause);
+        void SetUserRolesWithLinqExp(User user, Expression<Func<Role, bool>> whereClause);
     }
 }

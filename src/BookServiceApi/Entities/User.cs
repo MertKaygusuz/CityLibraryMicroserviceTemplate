@@ -2,7 +2,7 @@ using CityLibrary.Shared.DbBase.SQL;
 
 namespace BookServiceApi.Entities
 {
-    public class Users : TableBase
+    public class User : TableBase
     {
         public string UserId { get; set; }
         public string UserName { get; set; }

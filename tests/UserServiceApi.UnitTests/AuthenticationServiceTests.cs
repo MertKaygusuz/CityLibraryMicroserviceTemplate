@@ -54,14 +54,14 @@ public class AuthenticationServiceTests
     {
         // Arrange
         var loginDto = _fixture.Create<LoginDto>();
-        var user = _fixture.Create<Users>();
+        var user = _fixture.Create<User>();
         var token = _fixture.Create<CreateTokenResultDto>();
-        var newRefreshToken = _fixture.Create<RefreshTokens>();
+        var newRefreshToken = _fixture.Create<RefreshToken>();
 
         _userServiceMock.Setup(x => x.GetUserByUserNameAsync(loginDto.UserName)).ReturnsAsync(user);
         _verifyPasswordsMock.Setup(x => x.VerifyPasswordHash(loginDto.Password, user.Password, _localizerMock.Object)).Returns(true);
         _accessTokenServiceMock.Setup(x => x.CreateToken(It.IsAny<CreateTokenDto>())).Returns(token);
-        _refreshTokenServiceMock.Setup(x => x.CreateOrUpdateAsync(It.IsAny<RefreshTokens>(), true)).Returns(Task.CompletedTask);
+        _refreshTokenServiceMock.Setup(x => x.CreateOrUpdateAsync(It.IsAny<RefreshToken>(), true)).Returns(Task.CompletedTask);
 
         // Act
         var result = await _authenticationService.LoginAsync(loginDto);
@@ -78,7 +78,7 @@ public class AuthenticationServiceTests
     {
         // Arrange
         var loginDto = _fixture.Create<LoginDto>();
-        var user = _fixture.Create<Users>();
+        var user = _fixture.Create<User>();
 
         _userServiceMock.Setup(x => x.GetUserByUserNameAsync(loginDto.UserName)).ReturnsAsync(user);
         _verifyPasswordsMock.Setup(x => x.VerifyPasswordHash(loginDto.Password, user.Password, _localizerMock.Object)).Returns(false);
@@ -93,7 +93,7 @@ public class AuthenticationServiceTests
     {
         // Arrange
         var loginDto = _fixture.Create<LoginDto>();
-        Users user = null;
+        User user = null;
 
         _userServiceMock.Setup(x => x.GetUserByUserNameAsync(loginDto.UserName)).ReturnsAsync(user);
         _verifyPasswordsMock.Setup(x => x.VerifyPasswordHash(loginDto.Password, "fake_password", _localizerMock.Object)).Returns(true);
@@ -121,14 +121,14 @@ public class AuthenticationServiceTests
     {
         // Arrange
         var refreshTokenKey = _fixture.Create<string>();
-        var oldToken = _fixture.Create<RefreshTokens>();
+        var oldToken = _fixture.Create<RefreshToken>();
         oldToken.DueTime = DateTime.Now.AddHours(2);
         var newToken = _fixture.Create<CreateTokenResultDto>();
-        var newRefreshToken = _fixture.Create<RefreshTokens>();
+        var newRefreshToken = _fixture.Create<RefreshToken>();
 
         _refreshTokenServiceMock.Setup(x => x.GetByKeyAsync(refreshTokenKey)).ReturnsAsync(oldToken);
         _accessTokenServiceMock.Setup(x => x.CreateToken(It.IsAny<CreateTokenDto>())).Returns(newToken);
-        _refreshTokenServiceMock.Setup(x => x.CreateOrUpdateAsync(It.IsAny<RefreshTokens>(), true)).Returns(Task.CompletedTask);
+        _refreshTokenServiceMock.Setup(x => x.CreateOrUpdateAsync(It.IsAny<RefreshToken>(), true)).Returns(Task.CompletedTask);
         _refreshTokenServiceMock.Setup(x => x.DeleteAsync(refreshTokenKey)).Returns(Task.CompletedTask);
 
         // Act
@@ -146,7 +146,7 @@ public class AuthenticationServiceTests
     {
         // Arrange
         var refreshTokenKey = _fixture.Create<string>();
-        RefreshTokens oldToken = null;
+        RefreshToken oldToken = null;
 
         _refreshTokenServiceMock.Setup(x => x.GetByKeyAsync(refreshTokenKey)).ReturnsAsync(oldToken);
 
@@ -159,7 +159,7 @@ public class AuthenticationServiceTests
     {
         // Arrange
         var refreshTokenKey = _fixture.Create<string>();
-        var oldToken = _fixture.Create<RefreshTokens>();
+        var oldToken = _fixture.Create<RefreshToken>();
         oldToken.DueTime = DateTime.Now.AddHours(-2);
 
         _refreshTokenServiceMock.Setup(x => x.GetByKeyAsync(refreshTokenKey)).ReturnsAsync(oldToken);

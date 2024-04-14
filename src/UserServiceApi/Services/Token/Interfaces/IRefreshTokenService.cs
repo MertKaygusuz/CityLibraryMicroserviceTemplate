@@ -5,10 +5,10 @@ namespace UserServiceApi.Services.Token.Interfaces
 {
     public interface IRefreshTokenService : IBaseCheckService
     {
-        Task CreateOrUpdateAsync(RefreshTokens token, bool autoExpiration = true);
+        Task CreateOrUpdateAsync(RefreshToken token, bool autoExpiration = true);
 
         Task DeleteAsync(string key);
 
-        Task<RefreshTokens> GetByKeyAsync(string key);
+        Task<RefreshToken> GetByKeyAsync(string key);
     }
 }

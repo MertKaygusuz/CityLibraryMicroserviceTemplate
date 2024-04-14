@@ -4,9 +4,9 @@ using UserServiceApi.Entities;
 
 namespace UserServiceApi.Configurations
 {
-    internal class RolesConfiguration : IEntityTypeConfiguration<Roles>
+    internal class RolesConfiguration : IEntityTypeConfiguration<Role>
     {
-        public void Configure(EntityTypeBuilder<Roles> builder)
+        public void Configure(EntityTypeBuilder<Role> builder)
         {
             builder.HasKey(r => r.RoleId);
             builder.HasIndex(r => r.RoleName)

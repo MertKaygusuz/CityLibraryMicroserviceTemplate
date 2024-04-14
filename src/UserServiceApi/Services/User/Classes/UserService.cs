@@ -54,7 +54,7 @@ namespace UserServiceApi.Services.User.Classes
             _httpContextAccessor = httpContextAccessor;
             AdminUpdateUserFunc = AdminUpdateUserAsync;
         }
-        public async Task<Users> GetUserByUserNameAsync(string userName)
+        public async Task<Entities.User> GetUserByUserNameAsync(string userName)
         {
             return await _usersRepo.GetDataWithLinqExp(x => x.UserName == userName, "Roles")
                                      .SingleOrDefaultAsync();
@@ -62,7 +62,7 @@ namespace UserServiceApi.Services.User.Classes
 
         public async Task<string> RegisterAsync(RegistrationDto registrationDto)
         {
-            Users newUser = _mapper.Map<RegistrationDto, Users>(registrationDto);
+            Entities.User newUser = _mapper.Map<RegistrationDto, Entities.User>(registrationDto);
             newUser.Password.CreatePasswordHash(out string hashedPass);
             newUser.Password = hashedPass;
             newUser.UserId = Guid.NewGuid().ToString();
@@ -72,7 +72,7 @@ namespace UserServiceApi.Services.User.Classes
             await _usersRepo.InsertAsync(newUser);
 
             var sendEndpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri(_options.Value.RabbitMqOptions.UserCreatedSenderUri));
-            await sendEndpoint.Send(_mapper.Map<Users, UserCreated>(newUser));
+            await sendEndpoint.Send(_mapper.Map<Entities.User, UserCreated>(newUser));
 
             await _unitOfWork.CommitAsync();
 
@@ -99,14 +99,14 @@ namespace UserServiceApi.Services.User.Classes
 
         public virtual async Task AdminUpdateUserAsync(AdminUserUpdateDto updateDto)
         {
-            Users theUser = await _usersRepo.GetByIdAsync(updateDto.UserId);
+            Entities.User theUser = await _usersRepo.GetByIdAsync(updateDto.UserId);
             theUser.FullName = updateDto.FullName;
             theUser.BirthDate = updateDto.BirthDate;
             theUser.Address = updateDto.Address;
             updateDto.Password.CreatePasswordHash(out string hashedPass);
             theUser.Password = hashedPass;
 
-            await _publishEndpoint.Publish(_mapper.Map<Users, UserUpdated>(theUser));
+            await _publishEndpoint.Publish(_mapper.Map<Entities.User, UserUpdated>(theUser));
 
             await _unitOfWork.CommitAsync();
         }

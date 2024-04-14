@@ -3,7 +3,7 @@ using CityLibrary.Shared.SharedEnums;
 
 namespace BookServiceApi.Entities
 {
-    public class Books : TableBase
+    public class Book : TableBase
     {
         public int BookId { get; set; }
 

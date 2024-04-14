@@ -4,6 +4,6 @@ using BookServiceApi.Repositories.Base;
 
 namespace BookServiceApi.Repositories.User;
 
-public class UsersRepo(AppDbContext dbContext) : BaseRepo<Users, string>(dbContext), IUsersRepo
+public class UsersRepo(AppDbContext dbContext) : BaseRepo<Entities.User, string>(dbContext), IUsersRepo
 {
 }

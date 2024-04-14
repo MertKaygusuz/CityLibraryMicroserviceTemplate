@@ -1,6 +1,6 @@
 ﻿namespace UserServiceApi.Entities.Cache
 {
-    public class RefreshTokens
+    public class RefreshToken
     {
         public string TokenKey { get; set; }
         

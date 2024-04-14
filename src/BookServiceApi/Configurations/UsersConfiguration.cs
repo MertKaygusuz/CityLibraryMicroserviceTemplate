@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BookServiceApi.Configurations
 {
-    internal class UsersConfiguration : IEntityTypeConfiguration<Users>
+    internal class UsersConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Users> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasKey(m => m.UserId);
 

@@ -9,9 +9,9 @@ using UserServiceApi.Entities;
 
 namespace UserServiceApi.Configurations
 {
-    internal class UsersConfiguration : IEntityTypeConfiguration<Users>
+    internal class UsersConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Users> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasKey(m => m.UserId);
 
@@ -35,7 +35,7 @@ namespace UserServiceApi.Configurations
             #region many-to-many configurations
             builder.HasMany(m => m.Roles)
                 .WithMany(r => r.Users)
-                .UsingEntity<UserRoles>(
+                .UsingEntity<UserRole>(
                     x => x.HasOne(mr => mr.Role).WithMany(r => r.UserRoles).HasForeignKey(mr => mr.RoleId),
                     x => x.HasOne(mr => mr.User).WithMany(m => m.UserRoles).HasForeignKey(mr => mr.UserId),
                     x => x.HasKey(mr => mr.Id)

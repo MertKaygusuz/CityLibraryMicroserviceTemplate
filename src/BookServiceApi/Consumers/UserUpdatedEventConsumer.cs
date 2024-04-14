@@ -13,7 +13,7 @@ namespace BookServiceApi.Consumers
 
         public async Task Consume(ConsumeContext<UserUpdated> context)
         {
-            Users theUser = await _usersRepo.GetByIdAsync(context.Message.UserId);
+            User theUser = await _usersRepo.GetByIdAsync(context.Message.UserId);
             if (theUser is null) {
                 return;
             }

@@ -4,13 +4,13 @@ using BookServiceApi.Entities;
 
 namespace BookServiceApi.Seeds
 {
-    class UsersSeed : IEntityTypeConfiguration<Users>
+    class UsersSeed : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Users> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
-            var members = new Users[]
+            var members = new User[]
             {
-                new Users
+                new User
                 {
                     UserId = "d964dfdf-7cdc-4a7a-a951-04b540bac28d",
                     UserName = "Admin",
@@ -19,7 +19,7 @@ namespace BookServiceApi.Seeds
                     Address = "Admin's Address",
                     CreatedAt = DateTime.UtcNow
                 },
-                new Users
+                new User
                 {
                     UserId = "75a4749d-1090-4ade-894e-2612adcd0c1c",
                     UserName = "User1",
@@ -28,7 +28,7 @@ namespace BookServiceApi.Seeds
                     Address = "Orhan's Address",
                     CreatedAt = DateTime.UtcNow
                 },
-                new Users
+                new User
                 {
                     UserId = "1146ae0a-cdf3-4822-a691-98f5da9c3f9e",
                     UserName = "User2",
@@ -37,7 +37,7 @@ namespace BookServiceApi.Seeds
                     Address = "Kaya's Address",
                     CreatedAt = DateTime.UtcNow
                 },
-                new Users
+                new User
                 {
                     UserId = "739d9fdf-f824-40d8-b909-4586bdc283d3",
                     UserName = "User3",

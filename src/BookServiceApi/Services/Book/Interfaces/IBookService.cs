@@ -32,7 +32,7 @@ namespace BookServiceApi.Services.Book.Interfaces
 
         Task<int> GetNumberOfAuthorsFromBookTableAsync();
 
-        Task<IEnumerable<Books>> GetAllBooks();
+        Task<IEnumerable<Entities.Book>> GetAllBooks();
 
         /// <summary>
         /// Inserts data to active book reservations

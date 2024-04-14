@@ -5,7 +5,7 @@ using CityLibrary.Shared.DbBase.SQL;
 
 namespace UserServiceApi.Entities
 {
-    public class Users : TableBase
+    public class User : TableBase
     {
         // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string UserId { get; set; }
@@ -20,8 +20,8 @@ namespace UserServiceApi.Entities
         public string Password { get; set; }
 
 
-        public virtual ICollection<UserRoles> UserRoles { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
 
-        public virtual List<Roles> Roles { get; set; }
+        public virtual List<Role> Roles { get; set; }
     }
 }

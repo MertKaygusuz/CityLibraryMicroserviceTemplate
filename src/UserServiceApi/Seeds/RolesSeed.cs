@@ -4,14 +4,14 @@ using UserServiceApi.Entities;
 
 namespace UserServiceApi.Seeds
 {
-    class RolesSeed : IEntityTypeConfiguration<Roles>
+    class RolesSeed : IEntityTypeConfiguration<Role>
     {
-        public void Configure(EntityTypeBuilder<Roles> builder)
+        public void Configure(EntityTypeBuilder<Role> builder)
         {
-            Roles[] roles =
+            Role[] roles =
             [
-                new Roles { RoleId = 1, RoleName = "Admin" },
-                new Roles { RoleId = 2, RoleName = "User"}
+                new Role { RoleId = 1, RoleName = "Admin" },
+                new Role { RoleId = 2, RoleName = "User"}
             ];
             builder.HasData(roles);
         }

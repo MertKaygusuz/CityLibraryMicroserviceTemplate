@@ -6,9 +6,9 @@ using UserServiceApi.Repositories.Base;
 
 namespace UserServiceApi.Repositories
 {
-    public class RolesRepo(AppDbContext dbContext) : BaseRepo<Roles, int>(dbContext), IRolesRepo
+    public class RolesRepo(AppDbContext dbContext) : BaseRepo<Role, int>(dbContext), IRolesRepo
     {
-        public void SetUserRolesWithLinqExp(Users user, Expression<Func<Roles, bool>> whereClause)
+        public void SetUserRolesWithLinqExp(User user, Expression<Func<Role, bool>> whereClause)
         {
             var roles = GetDataWithLinqExp(whereClause);
             _dbcontext.Roles.AttachRange(roles);

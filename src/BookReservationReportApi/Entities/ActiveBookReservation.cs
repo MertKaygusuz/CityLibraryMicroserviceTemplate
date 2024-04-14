@@ -5,14 +5,15 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace BookReservationReportApi.Entities
 {
-    [Table("BookReservationHistories")]
-    public class BookReservationHistories : TableBase
+    [Table("ActiveBookReservations")]
+    public class ActiveBookReservation : TableBase
     {
         [BsonRequired]
         public DateTime DeliveryDateToUser { get; set; }
 
-        [BsonRequired]
-        public DateTime RecievedDate { get; set; }
+        //Default return period 7 days
+        // [BsonIgnore]
+        // public DateTime AvailableAt => DeliveryDateToUser.AddDays(7);
 
         [BsonRequired]
         public string UserId { get; set; }

@@ -29,7 +29,7 @@ namespace BookReservationReportApi.GrpcServices.ReservationReport
             if (activeReservation is null)
                 throw new RpcException(new Status(StatusCode.NotFound, _localizer["Active_Book_Reservation_Not_Found"]));
 
-            var historyRecord = new BookReservationHistories
+            var historyRecord = new BookReservationHistory
             {
                 BookId = request.BookId,
                 UserId = request.UserId,

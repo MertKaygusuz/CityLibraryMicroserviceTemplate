@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BookServiceApi.Configurations
 {
-    internal class BooksConfiguration : IEntityTypeConfiguration<Books>
+    internal class BooksConfiguration : IEntityTypeConfiguration<Book>
     {
-        public void Configure(EntityTypeBuilder<Books> builder)
+        public void Configure(EntityTypeBuilder<Book> builder)
         {
             builder.HasKey(b => b.BookId);
             builder.Property(b => b.Author)

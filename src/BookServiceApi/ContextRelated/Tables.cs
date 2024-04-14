@@ -5,8 +5,8 @@ namespace BookServiceApi.ContextRelated
 {
     public partial class AppDbContext : DbContext
     {
-        public DbSet<Books> Books { get; set; }
+        public DbSet<Book> Books { get; set; }
         
-        public DbSet<Users> Users { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

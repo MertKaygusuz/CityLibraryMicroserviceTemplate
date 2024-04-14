@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BookServiceApi.Seeds
 {
-    class BooksSeed : IEntityTypeConfiguration<Books>
+    class BooksSeed : IEntityTypeConfiguration<Book>
     {
-        public void Configure(EntityTypeBuilder<Books> builder)
+        public void Configure(EntityTypeBuilder<Book> builder)
         {
-            var books = new Books[]
+            var books = new Book[]
             {
-                new Books
+                new Book
                 {
                     BookId = 1,
                     BookTitle = "Ailenin, Devletin ve Özel Mülkiyetin Kökeni",
@@ -24,7 +24,7 @@ namespace BookServiceApi.Seeds
                     AvailableCount = 3,
                     ReservedCount = 0
                 },
-                 new Books
+                 new Book
                  {
                      BookId = 2,
                      BookTitle = "Beyoğlu Rapsodisi",
@@ -37,7 +37,7 @@ namespace BookServiceApi.Seeds
                      AvailableCount = 4,
                      ReservedCount = 0
                  },
-                 new Books
+                 new Book
                   {
                       BookId = 3,
                       BookTitle = "Beyoğlu Rapsodisi",
@@ -50,7 +50,7 @@ namespace BookServiceApi.Seeds
                       AvailableCount = 3,
                       ReservedCount = 0
                   },
-                 new Books
+                 new Book
                   {
                       BookId = 4,
                       BookTitle = "Thomas' Calculus",
@@ -63,7 +63,7 @@ namespace BookServiceApi.Seeds
                       AvailableCount = 500,
                       ReservedCount = 0
                   },
-                 new Books
+                 new Book
                   {
                       BookId = 5,
                       BookTitle = "Thomas' Calculus",

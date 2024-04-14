@@ -3,7 +3,7 @@ using CityLibrary.Shared.DbBase.SQL;
 
 namespace UserServiceApi.Repositories
 {
-    public interface IUserRolesRepo : IBaseRepo<UserRoles, int>
+    public interface IUserRolesRepo : IBaseRepo<UserRole, int>
     {
     }
 }

@@ -4,7 +4,7 @@ using BookServiceApi.Repositories.Base;
 
 namespace BookServiceApi.Repositories.Book
 {
-    public class BooksRepo(AppDbContext dbContext) : BaseRepo<Books, int>(dbContext), IBooksRepo
+    public class BooksRepo(AppDbContext dbContext) : BaseRepo<Entities.Book, int>(dbContext), IBooksRepo
     {
     }
 }

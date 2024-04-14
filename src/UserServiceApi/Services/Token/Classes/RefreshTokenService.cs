@@ -23,12 +23,12 @@ namespace UserServiceApi.Services.Token.Classes
             return (await GetByKeyAsync(id as string)) is not null;
         }
 
-        public async Task<RefreshTokens> GetByKeyAsync(string key)
+        public async Task<RefreshToken> GetByKeyAsync(string key)
         {
-            return await _cache.GetRecordAsync<RefreshTokens>(key);
+            return await _cache.GetRecordAsync<RefreshToken>(key);
         }
 
-        public async Task CreateOrUpdateAsync(RefreshTokens token, bool autoExpiration = true)
+        public async Task CreateOrUpdateAsync(RefreshToken token, bool autoExpiration = true)
         {
             if (autoExpiration)
                 token.DueTime = DateTime.Now.AddHours(_tokenOptions.RefreshTokenExpiration);

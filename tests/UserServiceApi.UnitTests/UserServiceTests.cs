@@ -67,9 +67,9 @@ public class UserServiceTests
     {
         // Arrange
         string userName = "testuser";
-        var expectedUser = _fixture.Create<Users>();
+        var expectedUser = _fixture.Create<User>();
         expectedUser.UserName = userName;
-        var queryableUser = new List<Users> { expectedUser }.AsQueryable().BuildMock();
+        var queryableUser = new List<User> { expectedUser }.AsQueryable().BuildMock();
         _usersRepoMock.Setup(repo => repo.GetDataWithLinqExp(x => x.UserName == userName, "Roles"))
                         .Returns(queryableUser);
 
@@ -86,8 +86,8 @@ public class UserServiceTests
     {
         // Arrange
         string userName = "testuser";
-        Users expectedUser = null;
-        var queryableUser = new List<Users> { }.AsQueryable().BuildMock();
+        User expectedUser = null;
+        var queryableUser = new List<User> { }.AsQueryable().BuildMock();
         _usersRepoMock.Setup(repo => repo.GetDataWithLinqExp(x => x.UserName == userName, "Roles"))
                         .Returns(queryableUser);
 
@@ -103,15 +103,15 @@ public class UserServiceTests
     {
         // Arrange
         var registrationDto = _fixture.Create<RegistrationDto>();
-        var newUser = _fixture.Create<Users>();
+        var newUser = _fixture.Create<User>();
         var options = _fixture.Create<AppSetting>();
         options.RabbitMqOptions.UserCreatedSenderUri = "queue:fake-it-up-shekerim";
 
-        _mapperMock.Setup(mapper => mapper.Map<RegistrationDto, Users>(registrationDto))
+        _mapperMock.Setup(mapper => mapper.Map<RegistrationDto, User>(registrationDto))
             .Returns(newUser);
         _usersRepoMock.Setup(repo => repo.InsertAsync(newUser))
             .Returns(Task.CompletedTask);
-        _mapperMock.Setup(mapper => mapper.Map<Users, UserCreated>(newUser))
+        _mapperMock.Setup(mapper => mapper.Map<User, UserCreated>(newUser))
             .Returns(_fixture.Create<UserCreated>());
         _optionsMock.Setup(op => op.Value).Returns(options);
         _sendEndpointProviderMock.Setup(provider => provider.GetSendEndpoint(It.IsAny<Uri>()))
@@ -123,7 +123,7 @@ public class UserServiceTests
         // Assert
         Assert.Equal(newUser.UserId, result);
         _usersRepoMock.Verify(repo => repo.InsertAsync(newUser), Times.Once);
-        _rolesRepoMock.Verify(repo => repo.SetUserRolesWithLinqExp(It.IsAny<Users>(), It.IsAny<Expression<Func<Roles, bool>>>()), Times.Once);
+        _rolesRepoMock.Verify(repo => repo.SetUserRolesWithLinqExp(It.IsAny<User>(), It.IsAny<Expression<Func<Role, bool>>>()), Times.Once);
         _sendEndpointProviderMock.Verify(sep => sep.GetSendEndpoint(It.IsAny<Uri>()), Times.Once);
         _unitOfWorkMock.Verify(unitOfWork => unitOfWork.CommitAsync(), Times.Once);
     }

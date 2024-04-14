@@ -25,7 +25,7 @@ namespace BookReservationReportApi.Services.ReservationReport.Classes
             if (activeReservation is null)
                 throw new CustomBusinessException(_localizer["Active_Book_Reservation_Not_Found"]);
 
-            var historyRecord = new BookReservationHistories()
+            var historyRecord = new BookReservationHistory()
             {
                 BookId = model.BookId,
                 UserId = model.UserId,
@@ -40,7 +40,7 @@ namespace BookReservationReportApi.Services.ReservationReport.Classes
 
         public async Task ReservationCreateAsync(ActiveBookReservationModel model)
         {
-            var activeBookReservation = new ActiveBookReservations
+            var activeBookReservation = new ActiveBookReservation
             {
                 DeliveryDateToUser = model.DeliveryDateToUser,
                 UserId = model.UserId,

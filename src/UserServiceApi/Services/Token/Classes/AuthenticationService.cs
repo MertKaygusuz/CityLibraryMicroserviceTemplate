@@ -43,7 +43,7 @@ namespace UserServiceApi.Services.Token.Classes
 
             var token = _accessTokenService.CreateToken(createTokenDto);
 
-            var newRefreshToken = new RefreshTokens()
+            var newRefreshToken = new RefreshToken()
             {
                 ClientAgent = token.ClientAgent,
                 ClientIp = token.ClientIp,
@@ -69,7 +69,7 @@ namespace UserServiceApi.Services.Token.Classes
 
         public async Task<ReturnTokenRecord> RefreshLoginTokenAsync(string refreshTokenKey)
         {
-            RefreshTokens oldToken = await _refreshTokenService.GetByKeyAsync(refreshTokenKey);
+            RefreshToken oldToken = await _refreshTokenService.GetByKeyAsync(refreshTokenKey);
 
             if (oldToken is null)
                 throw new CustomBusinessException("Refresh token could not be found!");
@@ -86,7 +86,7 @@ namespace UserServiceApi.Services.Token.Classes
             };
             CreateTokenResultDto newToken = _accessTokenService.CreateToken(createTokenDto);
 
-            var newRefreshToken = new RefreshTokens()
+            var newRefreshToken = new RefreshToken()
             {
                 ClientAgent = newToken.ClientAgent,
                 ClientIp = newToken.ClientIp,

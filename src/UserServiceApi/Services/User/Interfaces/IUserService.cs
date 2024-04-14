@@ -6,7 +6,7 @@ namespace UserServiceApi.Services.User.Interfaces
 {
     public interface IUserService : IBaseCheckService
     {
-        Task<Users> GetUserByUserNameAsync(string userName);
+        Task<Entities.User> GetUserByUserNameAsync(string userName);
 
         /// <summary>
         /// Registers new user
