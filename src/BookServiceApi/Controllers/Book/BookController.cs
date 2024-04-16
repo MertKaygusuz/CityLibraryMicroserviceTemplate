@@ -10,7 +10,6 @@ namespace BookServiceApi.Controllers.Book
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    // [Authorize(Policy = "TokenKeysPolicy")]
     [Authorize(Roles = "Admin")]
     public class BookController : ControllerBase
     {
@@ -21,7 +20,8 @@ namespace BookServiceApi.Controllers.Book
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllBooks()
+        [ProducesResponseType(typeof(IEnumerable<Entities.Book>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<Entities.Book>>> GetAllBooks()
         {
             var result = await _bookService.GetAllBooks();
             return Ok(result);
@@ -36,34 +36,38 @@ namespace BookServiceApi.Controllers.Book
 
         [HttpPut]
         [ServiceFilter(typeof(GenericNotFoundFilter<IBookService>))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> BookInfoUpdate(UpdateBookDto dto)
         {
             await _bookService.UpdateBookInfoAsync(dto);
-            return Ok();
+            return NoContent();
         }
 
         [HttpDelete]
         [ServiceFilter(typeof(GenericNotFoundFilter<IBookService>))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteBook(DeleteBookDto dto)
         {
             await _bookService.DeleteBookAsync(dto);
-            return Ok();
+            return NoContent();
         }
         
         [HttpPost]
         [ServiceFilter(typeof(IAssigningBookFilter))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> AssignBookToUser(AssignBookToUserDto dto)
         {
             await _bookService.AssignBookToUserAsync(dto);
-            return Ok();
+            return NoContent();
         }
 
         [HttpPost]
         [ServiceFilter(typeof(IUnAssigningBookFilter))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> UnAssignBookFromUser(AssignBookToUserDto dto)
         {
             await _bookService.UnAssignBookFromUserAsync(dto);
-            return Ok();
+            return NoContent();
         }
     }
 }

@@ -21,6 +21,7 @@ using System.Text.Json;
 using MassTransit;
 using BookServiceApi.Consumers;
 using BookServiceApi.Repositories.User;
+using BookServiceApi.Services.BookReservationApiService.Grpc;
 
 namespace BookServiceApi.ServicesExtensions
 {
@@ -40,6 +41,7 @@ namespace BookServiceApi.ServicesExtensions
             });
 
             services.AddSingleton<ICustomMapper, MapsterMapping>();
+            services.AddSingleton<IBookReservationRecordApiGrpc, BookReservationRecordApiGrpc>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

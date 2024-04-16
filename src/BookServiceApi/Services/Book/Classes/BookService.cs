@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BookServiceApi.Dtos.Book;
-using BookServiceApi.Entities;
 using BookServiceApi.Repositories.Book;
 using BookServiceApi.Services.Book.Interfaces;
 using CityLibrary.Shared.DbBase.SQL.UnitOfWorks;
@@ -11,13 +10,9 @@ using BookServiceApi.Services.BookReservationApiService;
 using CityLibrary.Shared.SharedModels;
 using Microsoft.Extensions.Options;
 using UserServiceApi.AppSettings;
-using Grpc.Net.Client;
-using BookReservationReturn;
-using Google.Protobuf.WellKnownTypes;
-using Grpc.Core.Interceptors;
-using BookServiceApi.Interceptors;
 using MassTransit;
 using CityLibrary.Shared.SharedModels.QueueModels;
+using BookServiceApi.Services.BookReservationApiService.Grpc;
 
 namespace BookServiceApi.Services.Book.Classes
 {
@@ -31,6 +26,7 @@ namespace BookServiceApi.Services.Book.Classes
         private readonly IBookReservationRecordApi _bookReservationRecordApi;
         private readonly IOptions<AppSetting> _options;
         private readonly ISendEndpointProvider _sendEndpointProvider;
+        private readonly IBookReservationRecordApiGrpc _bookReservationRecordApiGrpc;
 
         public BookService(IBooksRepo booksRepo, 
                            IUnitOfWork unitOfWork,
@@ -39,7 +35,8 @@ namespace BookServiceApi.Services.Book.Classes
                            IOptions<AppSetting> options,
                            ISendEndpointProvider sendEndpointProvider,
                            IBookReservationRecordApi bookReservationRecordApi,
-                           IHttpContextAccessor httpContextAccessor)
+                           IHttpContextAccessor httpContextAccessor,
+                           IBookReservationRecordApiGrpc bookReservationRecordApiGrpc)
         {
             _booksRepo = booksRepo;
             _usersRepo = usersRepo;
@@ -49,6 +46,7 @@ namespace BookServiceApi.Services.Book.Classes
             _bookReservationRecordApi = bookReservationRecordApi;
             _options = options;
             _sendEndpointProvider = sendEndpointProvider;
+            _bookReservationRecordApiGrpc = bookReservationRecordApiGrpc;
         }
 
         public async Task<int> BookRegisterAsync(RegisterBookDto dto)
@@ -102,8 +100,8 @@ namespace BookServiceApi.Services.Book.Classes
             theBook.AvailableCount -= 1;
             theBook.ReservedCount += 1;
 
-            string authHeader = _httpContextAccessor.HttpContext.Request.Headers.Authorization;
-            string langHeader = _httpContextAccessor.HttpContext.Request.Headers.AcceptLanguage;
+            string authHeader = _httpContextAccessor?.HttpContext?.Request?.Headers?.Authorization;
+            string langHeader = _httpContextAccessor?.HttpContext?.Request?.Headers?.AcceptLanguage;
 
             var theUser = await _usersRepo.Value.GetByIdAsync(dto.UserId);
 
@@ -124,8 +122,8 @@ namespace BookServiceApi.Services.Book.Classes
         public async Task<bool> CheckIfAnyAvailableBooksAsync(int bookId)
         {
             short availableBookCount = await _booksRepo.GetDataWithLinqExp(x => x.BookId == bookId)
-                                                    .Select(x => x.AvailableCount)
-                                                    .SingleOrDefaultAsync();
+                                                       .Select(x => x.AvailableCount)
+                                                       .SingleOrDefaultAsync();
 
             return availableBookCount > 0;
         }
@@ -143,36 +141,7 @@ namespace BookServiceApi.Services.Book.Classes
 
             var userRecord = await _usersRepo.Value.GetByIdAsync(dto.UserId);
 
-            using var channel = GrpcChannel.ForAddress(_options.Value.BookReservationGrpcEndPoint);
-            var invoker = channel.Intercept(new GrpcHeadersInterceptor(_httpContextAccessor));
-            var client = new GrpcBookReservation.GrpcBookReservationClient(invoker);
-            var request = new GrpcActiveBookReservationModel
-            {
-                UserId = dto.UserId,
-                User = new GrpcUserModel
-                {
-                    UserId = dto.UserId,
-                    UserName = userRecord.UserName,
-                    FullName = userRecord.FullName,
-                    BirthDate = Timestamp.FromDateTime(userRecord.BirthDate),
-                    Address = userRecord.Address
-                },
-                BookId = dto.BookId,
-                Book = new GrpcBookModel 
-                {
-                    BookId = dto.BookId,
-                    Author = bookRecord.Author,
-                    BookTitle = bookRecord.BookTitle,
-                    FirstPublishDate = Timestamp.FromDateTime(bookRecord.FirstPublishDate),
-                    EditionNumber = bookRecord.EditionNumber,
-                    EditionDate = Timestamp.FromDateTime(bookRecord.EditionDate),
-                    TitleType = (int) bookRecord.TitleType,
-                    CoverType = (int) bookRecord.CoverType
-                }
-            };
-
-            // grpc call here
-            await client.ReturnBookAsync(request);
+            await _bookReservationRecordApiGrpc.CallReturnBookAsync(userRecord, bookRecord);
 
             await _unitOfWork.CommitAsync();
         }
