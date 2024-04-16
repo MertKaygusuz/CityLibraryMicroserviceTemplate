@@ -173,5 +173,21 @@ public class UserServiceTests
         await Assert.ThrowsAsync<CustomBusinessException>(() => _userService.UserSelfUpdateAsync(selfUpdateDto));
     }
 
+    [Fact]
+    public async Task AdminUpdateUserAsync_WithValidDto_UpdatesUserAndPublishesEvent()
+    {
+        // Arrange
+        var updateDto = _fixture.Create<AdminUserUpdateDto>();
+        var user = _fixture.Create<User>();
+        _usersRepoMock.Setup(repo => repo.GetByIdAsync(updateDto.UserId)).ReturnsAsync(user);
+
+        // Act
+        await _userService.AdminUpdateUserAsync(updateDto);
+
+        // Assert
+        _usersRepoMock.Verify(repo => repo.GetByIdAsync(updateDto.UserId), Times.Once);
+        _publishEndpointMock.Verify(publishEndpoint => publishEndpoint.Publish(It.IsAny<UserUpdated>(), default), Times.Once);
+        _unitOfWorkMock.Verify(unitOfWork => unitOfWork.CommitAsync(), Times.Once);
+    }
 
 }
