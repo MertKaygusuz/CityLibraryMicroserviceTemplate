@@ -12,7 +12,7 @@ namespace BookReservationReportApi.Controllers.Report
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class ReportController(IReservationReportService reservationReportService) : ControllerBase
     {
         private readonly IReservationReportService _reservationReportService = reservationReportService;

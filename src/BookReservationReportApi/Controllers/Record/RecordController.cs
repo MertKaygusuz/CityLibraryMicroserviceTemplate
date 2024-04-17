@@ -16,7 +16,7 @@ namespace BookReservationReportApi.Controllers.Record
         public async Task<IActionResult> CreateReservation(ActiveBookReservationModel dto)
         {
             await _reservationRecordService.ReservationCreateAsync(dto);
-            return Ok();
+            return NoContent();
         }
     }
 }
