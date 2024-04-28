@@ -31,7 +31,8 @@ namespace UserServiceApi.ServicesExtensions
             {
                 var triggerAssembly = Assembly.GetAssembly(typeof(AppDbContext));
                 options.UseTriggers(triggerOptions => triggerOptions.AddAssemblyTriggers(triggerAssembly!));
-                options.UseInMemoryDatabase(appSetting.DbConnectionString);
+                // options.UseInMemoryDatabase(appSetting.DbConnectionString);
+                options.UseNpgsql(appSetting.DbConnectionString);
             });
 
             services.AddSingleton<ICustomMapper, MapsterMapping>();

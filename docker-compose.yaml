@@ -1,4 +1,13 @@
 services:
+  postgres_user_service:
+    container_name: user-service-postgres
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgrespw
+    ports:
+      - 5432:5432
+    networks:
+      - city-library-microservices
   mongodb_book_reservation_service:
     container_name: book-reservation-service-mongodb
     image: mongo
