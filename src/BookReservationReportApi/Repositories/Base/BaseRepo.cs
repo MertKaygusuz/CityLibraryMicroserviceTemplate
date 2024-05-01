@@ -31,11 +31,15 @@ namespace BookReservationReportApi.Repositories.Base
 
         public virtual async Task<bool> AddRangeAsync(IEnumerable<T> entities, IClientSessionHandle session = null)
         {
-            var options = new BulkWriteOptions { IsOrdered = false, BypassDocumentValidation = false };
-            if (session is null)
-                return (await _collection.BulkWriteAsync((IEnumerable<WriteModel<T>>)entities, options)).IsAcknowledged;
+            if (session is null) 
+            {
+                await _collection.InsertManyAsync(entities);
+                return true;
+            }
 
-            return (await _collection.BulkWriteAsync(session, (IEnumerable<WriteModel<T>>)entities, options)).IsAcknowledged;
+            await _collection.InsertManyAsync(session, entities);
+
+            return true;
         }
 
         public virtual async Task<DeleteResult> DeleteAsync(T entity, IClientSessionHandle session = null)

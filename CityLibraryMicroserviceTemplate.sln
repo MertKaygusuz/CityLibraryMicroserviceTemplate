@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookReservationReportApi.Un
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserServiceApi.IntegrationTests", "tests\UserServiceApi.IntegrationTests\UserServiceApi.IntegrationTests.csproj", "{BA1C3876-5662-4C15-8728-12A380841DDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookReservationReportApi.IntegrationTests", "tests\BookReservationReportApi.IntegrationTests\BookReservationReportApi.IntegrationTests.csproj", "{7756F752-D74D-47D2-B44B-89D31207C48A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{BA1C3876-5662-4C15-8728-12A380841DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA1C3876-5662-4C15-8728-12A380841DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA1C3876-5662-4C15-8728-12A380841DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7756F752-D74D-47D2-B44B-89D31207C48A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7756F752-D74D-47D2-B44B-89D31207C48A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7756F752-D74D-47D2-B44B-89D31207C48A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7756F752-D74D-47D2-B44B-89D31207C48A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3CF277AB-3BFF-4CBE-B931-3F328903F115} = {AACEA580-1670-43B8-A061-8F2B967A1E0F}
@@ -81,5 +87,6 @@ Global
 		{15BCC845-906C-46DD-9B2D-B67A9C7A451B} = {9E914825-E8ED-42C4-9D01-F2CAD2220BD0}
 		{CD0038F6-BCDD-45E5-98FF-9940E480DBBA} = {9E914825-E8ED-42C4-9D01-F2CAD2220BD0}
 		{BA1C3876-5662-4C15-8728-12A380841DDC} = {9E914825-E8ED-42C4-9D01-F2CAD2220BD0}
+		{7756F752-D74D-47D2-B44B-89D31207C48A} = {9E914825-E8ED-42C4-9D01-F2CAD2220BD0}
 	EndGlobalSection
 EndGlobal

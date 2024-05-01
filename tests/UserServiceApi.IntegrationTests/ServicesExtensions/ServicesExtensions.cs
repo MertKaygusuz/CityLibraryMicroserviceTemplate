@@ -12,7 +12,8 @@ public static class ServiceCollectionExtensions
         var descriptor = services.SingleOrDefault(d =>
                 d.ServiceType == typeof(DbContextOptions<AppDbContext>));
 
-        if (descriptor != null) services.Remove(descriptor);
+        if (descriptor != null)
+            services.Remove(descriptor);
     }
 
     public static void EnsureCreated<T>(this IServiceCollection services)
