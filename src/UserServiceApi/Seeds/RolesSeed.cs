@@ -10,8 +10,8 @@ namespace UserServiceApi.Seeds
         {
             Role[] roles =
             [
-                new Role { RoleId = 1, RoleName = "Admin" },
-                new Role { RoleId = 2, RoleName = "User"}
+                new Role { RoleId = 1, RoleName = "Admin", CreatedAt = DateTime.UtcNow },
+                new Role { RoleId = 2, RoleName = "User", CreatedAt = DateTime.UtcNow }
             ];
             builder.HasData(roles);
         }

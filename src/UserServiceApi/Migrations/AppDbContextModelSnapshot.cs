@@ -67,13 +67,13 @@ namespace UserServiceApi.Migrations
                         new
                         {
                             RoleId = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(2030),
                             RoleName = "Admin"
                         },
                         new
                         {
                             RoleId = 2,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(2030),
                             RoleName = "User"
                         });
                 });
@@ -137,40 +137,40 @@ namespace UserServiceApi.Migrations
                         {
                             UserId = "d964dfdf-7cdc-4a7a-a951-04b540bac28d",
                             Address = "Admin's Address",
-                            BirthDate = new DateTime(1994, 4, 27, 14, 34, 6, 501, DateTimeKind.Utc).AddTicks(1390),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(1994, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2670),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2680),
                             FullName = "Admin",
-                            Password = "$2a$11$06uITKjXe9K4dOVmWStSgupIFx1jqSAmlwy0YIKYI4tQuy.y6BqtC",
+                            Password = "$2a$11$UG/zfU0HjpWCQj4/1iu4uepaQhO3G1prPC3TSA5nMoQy5osS7r8cG",
                             UserName = "Admin"
                         },
                         new
                         {
                             UserId = "75a4749d-1090-4ade-894e-2612adcd0c1c",
                             Address = "Orhan's Address",
-                            BirthDate = new DateTime(1994, 4, 27, 14, 34, 6, 501, DateTimeKind.Utc).AddTicks(1410),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(1994, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2690),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2690),
                             FullName = "Orhan",
-                            Password = "$2a$11$06uITKjXe9K4dOVmWStSgupIFx1jqSAmlwy0YIKYI4tQuy.y6BqtC",
+                            Password = "$2a$11$UG/zfU0HjpWCQj4/1iu4uepaQhO3G1prPC3TSA5nMoQy5osS7r8cG",
                             UserName = "User1"
                         },
                         new
                         {
                             UserId = "1146ae0a-cdf3-4822-a691-98f5da9c3f9e",
                             Address = "Kaya's Address",
-                            BirthDate = new DateTime(1984, 4, 27, 14, 34, 6, 501, DateTimeKind.Utc).AddTicks(1410),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(1984, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2690),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2690),
                             FullName = "Kaya",
-                            Password = "$2a$11$06uITKjXe9K4dOVmWStSgupIFx1jqSAmlwy0YIKYI4tQuy.y6BqtC",
+                            Password = "$2a$11$UG/zfU0HjpWCQj4/1iu4uepaQhO3G1prPC3TSA5nMoQy5osS7r8cG",
                             UserName = "User2"
                         },
                         new
                         {
                             UserId = "739d9fdf-f824-40d8-b909-4586bdc283d3",
                             Address = "Kadriye's Address",
-                            BirthDate = new DateTime(2004, 4, 27, 14, 34, 6, 501, DateTimeKind.Utc).AddTicks(1410),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(2004, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2690),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2690),
                             FullName = "Kadriye",
-                            Password = "$2a$11$06uITKjXe9K4dOVmWStSgupIFx1jqSAmlwy0YIKYI4tQuy.y6BqtC",
+                            Password = "$2a$11$UG/zfU0HjpWCQj4/1iu4uepaQhO3G1prPC3TSA5nMoQy5osS7r8cG",
                             UserName = "User3"
                         });
                 });
@@ -222,35 +222,35 @@ namespace UserServiceApi.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(4080),
                             RoleId = 1,
                             UserId = "d964dfdf-7cdc-4a7a-a951-04b540bac28d"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(4080),
                             RoleId = 2,
                             UserId = "d964dfdf-7cdc-4a7a-a951-04b540bac28d"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(4080),
                             RoleId = 2,
                             UserId = "75a4749d-1090-4ade-894e-2612adcd0c1c"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(4080),
                             RoleId = 2,
                             UserId = "1146ae0a-cdf3-4822-a691-98f5da9c3f9e"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(4080),
                             RoleId = 2,
                             UserId = "739d9fdf-f824-40d8-b909-4586bdc283d3"
                         });

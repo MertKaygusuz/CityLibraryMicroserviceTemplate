@@ -91,8 +91,8 @@ namespace UserServiceApi.Migrations
                 columns: new[] { "RoleId", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "LastUpdatedAt", "LastUpdatedBy", "RoleName" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, null, "Admin" },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, null, "User" }
+                    { 1, new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(2030), null, null, null, null, null, "Admin" },
+                    { 2, new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(2030), null, null, null, null, null, "User" }
                 });
 
             migrationBuilder.InsertData(
@@ -100,10 +100,10 @@ namespace UserServiceApi.Migrations
                 columns: new[] { "UserId", "Address", "BirthDate", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "FullName", "LastUpdatedAt", "LastUpdatedBy", "Password", "UserName" },
                 values: new object[,]
                 {
-                    { "1146ae0a-cdf3-4822-a691-98f5da9c3f9e", "Kaya's Address", new DateTime(1984, 4, 27, 14, 34, 6, 501, DateTimeKind.Utc).AddTicks(1410), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Kaya", null, null, "$2a$11$06uITKjXe9K4dOVmWStSgupIFx1jqSAmlwy0YIKYI4tQuy.y6BqtC", "User2" },
-                    { "739d9fdf-f824-40d8-b909-4586bdc283d3", "Kadriye's Address", new DateTime(2004, 4, 27, 14, 34, 6, 501, DateTimeKind.Utc).AddTicks(1410), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Kadriye", null, null, "$2a$11$06uITKjXe9K4dOVmWStSgupIFx1jqSAmlwy0YIKYI4tQuy.y6BqtC", "User3" },
-                    { "75a4749d-1090-4ade-894e-2612adcd0c1c", "Orhan's Address", new DateTime(1994, 4, 27, 14, 34, 6, 501, DateTimeKind.Utc).AddTicks(1410), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Orhan", null, null, "$2a$11$06uITKjXe9K4dOVmWStSgupIFx1jqSAmlwy0YIKYI4tQuy.y6BqtC", "User1" },
-                    { "d964dfdf-7cdc-4a7a-a951-04b540bac28d", "Admin's Address", new DateTime(1994, 4, 27, 14, 34, 6, 501, DateTimeKind.Utc).AddTicks(1390), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Admin", null, null, "$2a$11$06uITKjXe9K4dOVmWStSgupIFx1jqSAmlwy0YIKYI4tQuy.y6BqtC", "Admin" }
+                    { "1146ae0a-cdf3-4822-a691-98f5da9c3f9e", "Kaya's Address", new DateTime(1984, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2690), new DateTime(2024, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2690), null, null, null, "Kaya", null, null, "$2a$11$UG/zfU0HjpWCQj4/1iu4uepaQhO3G1prPC3TSA5nMoQy5osS7r8cG", "User2" },
+                    { "739d9fdf-f824-40d8-b909-4586bdc283d3", "Kadriye's Address", new DateTime(2004, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2690), new DateTime(2024, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2690), null, null, null, "Kadriye", null, null, "$2a$11$UG/zfU0HjpWCQj4/1iu4uepaQhO3G1prPC3TSA5nMoQy5osS7r8cG", "User3" },
+                    { "75a4749d-1090-4ade-894e-2612adcd0c1c", "Orhan's Address", new DateTime(1994, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2690), new DateTime(2024, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2690), null, null, null, "Orhan", null, null, "$2a$11$UG/zfU0HjpWCQj4/1iu4uepaQhO3G1prPC3TSA5nMoQy5osS7r8cG", "User1" },
+                    { "d964dfdf-7cdc-4a7a-a951-04b540bac28d", "Admin's Address", new DateTime(1994, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2670), new DateTime(2024, 5, 3, 20, 28, 19, 872, DateTimeKind.Utc).AddTicks(2680), null, null, null, "Admin", null, null, "$2a$11$UG/zfU0HjpWCQj4/1iu4uepaQhO3G1prPC3TSA5nMoQy5osS7r8cG", "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -111,11 +111,11 @@ namespace UserServiceApi.Migrations
                 columns: new[] { "Id", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "LastUpdatedAt", "LastUpdatedBy", "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, null, 1, "d964dfdf-7cdc-4a7a-a951-04b540bac28d" },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, null, 2, "d964dfdf-7cdc-4a7a-a951-04b540bac28d" },
-                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, null, 2, "75a4749d-1090-4ade-894e-2612adcd0c1c" },
-                    { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, null, 2, "1146ae0a-cdf3-4822-a691-98f5da9c3f9e" },
-                    { 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, null, 2, "739d9fdf-f824-40d8-b909-4586bdc283d3" }
+                    { 1, new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(4080), null, null, null, null, null, 1, "d964dfdf-7cdc-4a7a-a951-04b540bac28d" },
+                    { 2, new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(4080), null, null, null, null, null, 2, "d964dfdf-7cdc-4a7a-a951-04b540bac28d" },
+                    { 3, new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(4080), null, null, null, null, null, 2, "75a4749d-1090-4ade-894e-2612adcd0c1c" },
+                    { 4, new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(4080), null, null, null, null, null, 2, "1146ae0a-cdf3-4822-a691-98f5da9c3f9e" },
+                    { 5, new DateTime(2024, 5, 3, 20, 28, 19, 731, DateTimeKind.Utc).AddTicks(4080), null, null, null, null, null, 2, "739d9fdf-f824-40d8-b909-4586bdc283d3" }
                 });
 
             migrationBuilder.CreateIndex(

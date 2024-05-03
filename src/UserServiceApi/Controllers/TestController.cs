@@ -43,16 +43,6 @@ namespace UserServiceApi.Controllers
         }
 
         [HttpGet]
-        public async Task DeleteFirstRole()
-        {
-            var role = await _rolesRepo.GetData(false).FirstOrDefaultAsync();
-
-            _rolesRepo.Delete(role);
-
-            _unitOfWork.Commit();
-        }
-
-        [HttpGet]
         public void ThrowCustomException()
         {
             throw new CustomStatusException("Not found", 404);

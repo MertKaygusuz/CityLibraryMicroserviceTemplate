@@ -20,7 +20,8 @@ namespace UserServiceApi.Seeds
                     FullName = "Admin",
                     BirthDate = DateTime.UtcNow.AddYears(-30),
                     Address = "Admin's Address",
-                    Password = hashedPass
+                    Password = hashedPass,
+                    CreatedAt = DateTime.UtcNow
                 },
                 new User
                 {
@@ -29,7 +30,8 @@ namespace UserServiceApi.Seeds
                     FullName = "Orhan",
                     BirthDate = DateTime.UtcNow.AddYears(-30),
                     Address = "Orhan's Address",
-                    Password = hashedPass
+                    Password = hashedPass,
+                    CreatedAt = DateTime.UtcNow
                 },
                 new User
                 {
@@ -38,7 +40,8 @@ namespace UserServiceApi.Seeds
                     FullName = "Kaya",
                     BirthDate = DateTime.UtcNow.AddYears(-40),
                     Address = "Kaya's Address",
-                    Password = hashedPass
+                    Password = hashedPass,
+                    CreatedAt = DateTime.UtcNow
                 },
                 new User
                 {
@@ -47,7 +50,8 @@ namespace UserServiceApi.Seeds
                     FullName = "Kadriye",
                     BirthDate = DateTime.UtcNow.AddYears(-20),
                     Address = "Kadriye's Address",
-                    Password = hashedPass
+                    Password = hashedPass,
+                    CreatedAt = DateTime.UtcNow
                 }
             };
 
