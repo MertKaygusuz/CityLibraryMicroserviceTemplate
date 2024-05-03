@@ -17,6 +17,7 @@ using UserServiceApi.ActionFilters.Base;
 using UserServiceApi.UnitOfWorks;
 using MassTransit;
 using UserServiceApi.Helpers;
+using Serilog;
 
 namespace UserServiceApi.ServicesExtensions
 {
@@ -32,7 +33,7 @@ namespace UserServiceApi.ServicesExtensions
                 var triggerAssembly = Assembly.GetAssembly(typeof(AppDbContext));
                 options.UseTriggers(triggerOptions => triggerOptions.AddAssemblyTriggers(triggerAssembly!));
                 // options.UseInMemoryDatabase(appSetting.DbConnectionString);
-                options.UseNpgsql(appSetting.DbConnectionString);
+                options.UseNpgsql(appSetting.DbConnectionString).LogTo(Log.Logger.Information, LogLevel.Information);
             });
 
             services.AddSingleton<ICustomMapper, MapsterMapping>();

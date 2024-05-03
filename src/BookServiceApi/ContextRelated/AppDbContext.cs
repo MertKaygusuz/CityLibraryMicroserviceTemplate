@@ -10,7 +10,8 @@ namespace BookServiceApi.ContextRelated
     {
         public AppDbContext(DbContextOptions options) : base(options)
         {
-            Database.EnsureCreated();
+            // Database.EnsureCreated();
+            Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

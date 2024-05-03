@@ -22,6 +22,7 @@ using MassTransit;
 using BookServiceApi.Consumers;
 using BookServiceApi.Repositories.User;
 using BookServiceApi.Services.BookReservationApiService.Grpc;
+using Serilog;
 
 namespace BookServiceApi.ServicesExtensions
 {
@@ -37,7 +38,7 @@ namespace BookServiceApi.ServicesExtensions
             {
                 var triggerAssembly = Assembly.GetAssembly(typeof(AppDbContext));
                 options.UseTriggers(triggerOptions => triggerOptions.AddAssemblyTriggers(triggerAssembly!));
-                options.UseInMemoryDatabase(appSetting.DbConnectionString);
+                options.UseMySql(appSetting.DbConnectionString, ServerVersion.AutoDetect(appSetting.DbConnectionString)).LogTo(Log.Logger.Information, LogLevel.Information);
             });
 
             services.AddSingleton<ICustomMapper, MapsterMapping>();

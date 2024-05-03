@@ -26,55 +26,55 @@ namespace BookServiceApi.Seeds
                 },
                  new Book
                  {
-                     BookId = 2,
-                     BookTitle = "Beyoğlu Rapsodisi",
-                     Author = "Ahmet Ümit",
-                     FirstPublishDate = DateTime.UtcNow.AddYears(-19),
-                     EditionNumber = 4,
-                     EditionDate = DateTime.UtcNow.AddYears(-5),
-                     TitleType = BookTitleTypes.Literature,
-                     CoverType = BookCoverTypes.HardCover,
-                     AvailableCount = 4,
-                     ReservedCount = 0
+                    BookId = 2,
+                    BookTitle = "Beyoğlu Rapsodisi",
+                    Author = "Ahmet Ümit",
+                    FirstPublishDate = DateTime.UtcNow.AddYears(-19),
+                    EditionNumber = 4,
+                    EditionDate = DateTime.UtcNow.AddYears(-5),
+                    TitleType = BookTitleTypes.Literature,
+                    CoverType = BookCoverTypes.HardCover,
+                    AvailableCount = 4,
+                    ReservedCount = 0
                  },
                  new Book
                   {
-                      BookId = 3,
-                      BookTitle = "Beyoğlu Rapsodisi",
-                      Author = "Ahmet Ümit",
-                      FirstPublishDate = DateTime.UtcNow.AddYears(-19),
-                      EditionNumber = 3,
-                      EditionDate = DateTime.UtcNow.AddYears(-10),
-                      TitleType = BookTitleTypes.Literature,
-                      CoverType = BookCoverTypes.HardCover,
-                      AvailableCount = 3,
-                      ReservedCount = 0
+                    BookId = 3,
+                    BookTitle = "Beyoğlu Rapsodisi",
+                    Author = "Ahmet Ümit",
+                    FirstPublishDate = DateTime.UtcNow.AddYears(-19),
+                    EditionNumber = 3,
+                    EditionDate = DateTime.UtcNow.AddYears(-10),
+                    TitleType = BookTitleTypes.Literature,
+                    CoverType = BookCoverTypes.HardCover,
+                    AvailableCount = 3,
+                    ReservedCount = 0
                   },
                  new Book
                   {
-                      BookId = 4,
-                      BookTitle = "Thomas' Calculus",
-                      Author = "George Brinton Thomas",
-                      FirstPublishDate = DateTime.UtcNow.AddYears(-70),
-                      EditionNumber = 13,
-                      EditionDate = DateTime.UtcNow.AddYears(-5),
-                      TitleType = BookTitleTypes.Math,
-                      CoverType = BookCoverTypes.SoftCover,
-                      AvailableCount = 500,
-                      ReservedCount = 0
+                    BookId = 4,
+                    BookTitle = "Thomas' Calculus",
+                    Author = "George Brinton Thomas",
+                    FirstPublishDate = DateTime.UtcNow.AddYears(-70),
+                    EditionNumber = 13,
+                    EditionDate = DateTime.UtcNow.AddYears(-5),
+                    TitleType = BookTitleTypes.Math,
+                    CoverType = BookCoverTypes.SoftCover,
+                    AvailableCount = 500,
+                    ReservedCount = 0
                   },
                  new Book
                   {
-                      BookId = 5,
-                      BookTitle = "Thomas' Calculus",
-                      Author = "George Brinton Thomas",
-                      FirstPublishDate = DateTime.UtcNow.AddYears(-70),
-                      EditionNumber = 13,
-                      EditionDate = DateTime.UtcNow.AddYears(-5),
-                      TitleType = BookTitleTypes.Math,
-                      CoverType = BookCoverTypes.HardCover,
-                      AvailableCount = 50,
-                      ReservedCount = 0
+                    BookId = 5,
+                    BookTitle = "Thomas' Calculus",
+                    Author = "George Brinton Thomas",
+                    FirstPublishDate = DateTime.UtcNow.AddYears(-70),
+                    EditionNumber = 13,
+                    EditionDate = DateTime.UtcNow.AddYears(-5),
+                    TitleType = BookTitleTypes.Math,
+                    CoverType = BookCoverTypes.HardCover,
+                    AvailableCount = 50,
+                    ReservedCount = 0
                   }
             };
 
