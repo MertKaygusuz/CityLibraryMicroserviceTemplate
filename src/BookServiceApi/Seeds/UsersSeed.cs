@@ -16,7 +16,8 @@ namespace BookServiceApi.Seeds
                     UserName = "Admin",
                     FullName = "Admin",
                     BirthDate = DateTime.UtcNow.AddYears(-30),
-                    Address = "Admin's Address"
+                    Address = "Admin's Address",
+                    CreatedAt = DateTime.UtcNow
                 },
                 new User
                 {
@@ -24,7 +25,8 @@ namespace BookServiceApi.Seeds
                     UserName = "User1",
                     FullName = "Orhan",
                     BirthDate = DateTime.UtcNow.AddYears(-30),
-                    Address = "Orhan's Address"
+                    Address = "Orhan's Address",
+                    CreatedAt = DateTime.UtcNow
                 },
                 new User
                 {
@@ -32,7 +34,8 @@ namespace BookServiceApi.Seeds
                     UserName = "User2",
                     FullName = "Kaya",
                     BirthDate = DateTime.UtcNow.AddYears(-40),
-                    Address = "Kaya's Address"
+                    Address = "Kaya's Address",
+                    CreatedAt = DateTime.UtcNow
                 },
                 new User
                 {
@@ -40,7 +43,8 @@ namespace BookServiceApi.Seeds
                     UserName = "User3",
                     FullName = "Kadriye",
                     BirthDate = DateTime.UtcNow.AddYears(-20),
-                    Address = "Kadriye's Address"
+                    Address = "Kadriye's Address",
+                    CreatedAt = DateTime.UtcNow
                 }
             };
 

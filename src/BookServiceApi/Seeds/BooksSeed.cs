@@ -22,7 +22,8 @@ namespace BookServiceApi.Seeds
                     TitleType = BookTitleTypes.Science,
                     CoverType = BookCoverTypes.HardCover,
                     AvailableCount = 3,
-                    ReservedCount = 0
+                    ReservedCount = 0,
+                    CreatedAt = DateTime.UtcNow
                 },
                  new Book
                  {
@@ -35,7 +36,8 @@ namespace BookServiceApi.Seeds
                     TitleType = BookTitleTypes.Literature,
                     CoverType = BookCoverTypes.HardCover,
                     AvailableCount = 4,
-                    ReservedCount = 0
+                    ReservedCount = 0,
+                    CreatedAt = DateTime.UtcNow
                  },
                  new Book
                   {
@@ -48,7 +50,8 @@ namespace BookServiceApi.Seeds
                     TitleType = BookTitleTypes.Literature,
                     CoverType = BookCoverTypes.HardCover,
                     AvailableCount = 3,
-                    ReservedCount = 0
+                    ReservedCount = 0,
+                    CreatedAt = DateTime.UtcNow
                   },
                  new Book
                   {
@@ -61,7 +64,8 @@ namespace BookServiceApi.Seeds
                     TitleType = BookTitleTypes.Math,
                     CoverType = BookCoverTypes.SoftCover,
                     AvailableCount = 500,
-                    ReservedCount = 0
+                    ReservedCount = 0,
+                    CreatedAt = DateTime.UtcNow
                   },
                  new Book
                   {
@@ -74,7 +78,8 @@ namespace BookServiceApi.Seeds
                     TitleType = BookTitleTypes.Math,
                     CoverType = BookCoverTypes.HardCover,
                     AvailableCount = 50,
-                    ReservedCount = 0
+                    ReservedCount = 0,
+                    CreatedAt = DateTime.UtcNow
                   }
             };
 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookServiceApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240503200335_“InitialCreate”")]
+    [Migration("20240503202132_“InitialCreate”")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -97,10 +97,10 @@ namespace BookServiceApi.Migrations
                             AvailableCount = (short)3,
                             BookTitle = "Ailenin, Devletin ve Özel Mülkiyetin Kökeni",
                             CoverType = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EditionDate = new DateTime(1904, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4640),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6080),
+                            EditionDate = new DateTime(1904, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6080),
                             EditionNumber = (short)4,
-                            FirstPublishDate = new DateTime(1886, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4630),
+                            FirstPublishDate = new DateTime(1886, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6070),
                             ReservedCount = (short)0,
                             TitleType = 3
                         },
@@ -111,10 +111,10 @@ namespace BookServiceApi.Migrations
                             AvailableCount = (short)4,
                             BookTitle = "Beyoğlu Rapsodisi",
                             CoverType = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EditionDate = new DateTime(2019, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4640),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6090),
+                            EditionDate = new DateTime(2019, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6080),
                             EditionNumber = (short)4,
-                            FirstPublishDate = new DateTime(2005, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4640),
+                            FirstPublishDate = new DateTime(2005, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6080),
                             ReservedCount = (short)0,
                             TitleType = 1
                         },
@@ -125,10 +125,10 @@ namespace BookServiceApi.Migrations
                             AvailableCount = (short)3,
                             BookTitle = "Beyoğlu Rapsodisi",
                             CoverType = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EditionDate = new DateTime(2014, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4640),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6090),
+                            EditionDate = new DateTime(2014, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6090),
                             EditionNumber = (short)3,
-                            FirstPublishDate = new DateTime(2005, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4640),
+                            FirstPublishDate = new DateTime(2005, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6090),
                             ReservedCount = (short)0,
                             TitleType = 1
                         },
@@ -139,10 +139,10 @@ namespace BookServiceApi.Migrations
                             AvailableCount = (short)500,
                             BookTitle = "Thomas' Calculus",
                             CoverType = 0,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EditionDate = new DateTime(2019, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4640),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6090),
+                            EditionDate = new DateTime(2019, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6090),
                             EditionNumber = (short)13,
-                            FirstPublishDate = new DateTime(1954, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4640),
+                            FirstPublishDate = new DateTime(1954, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6090),
                             ReservedCount = (short)0,
                             TitleType = 2
                         },
@@ -153,10 +153,10 @@ namespace BookServiceApi.Migrations
                             AvailableCount = (short)50,
                             BookTitle = "Thomas' Calculus",
                             CoverType = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EditionDate = new DateTime(2019, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4650),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6090),
+                            EditionDate = new DateTime(2019, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6090),
                             EditionNumber = (short)13,
-                            FirstPublishDate = new DateTime(1954, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4650),
+                            FirstPublishDate = new DateTime(1954, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6090),
                             ReservedCount = (short)0,
                             TitleType = 2
                         });
@@ -217,8 +217,8 @@ namespace BookServiceApi.Migrations
                         {
                             UserId = "d964dfdf-7cdc-4a7a-a951-04b540bac28d",
                             Address = "Admin's Address",
-                            BirthDate = new DateTime(1994, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4750),
-                            CreatedAt = new DateTime(2024, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4750),
+                            BirthDate = new DateTime(1994, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6210),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6220),
                             FullName = "Admin",
                             UserName = "Admin"
                         },
@@ -226,8 +226,8 @@ namespace BookServiceApi.Migrations
                         {
                             UserId = "75a4749d-1090-4ade-894e-2612adcd0c1c",
                             Address = "Orhan's Address",
-                            BirthDate = new DateTime(1994, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4760),
-                            CreatedAt = new DateTime(2024, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4760),
+                            BirthDate = new DateTime(1994, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6220),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6220),
                             FullName = "Orhan",
                             UserName = "User1"
                         },
@@ -235,8 +235,8 @@ namespace BookServiceApi.Migrations
                         {
                             UserId = "1146ae0a-cdf3-4822-a691-98f5da9c3f9e",
                             Address = "Kaya's Address",
-                            BirthDate = new DateTime(1984, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4760),
-                            CreatedAt = new DateTime(2024, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4760),
+                            BirthDate = new DateTime(1984, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6220),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6220),
                             FullName = "Kaya",
                             UserName = "User2"
                         },
@@ -244,8 +244,8 @@ namespace BookServiceApi.Migrations
                         {
                             UserId = "739d9fdf-f824-40d8-b909-4586bdc283d3",
                             Address = "Kadriye's Address",
-                            BirthDate = new DateTime(2004, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4760),
-                            CreatedAt = new DateTime(2024, 5, 3, 20, 3, 35, 148, DateTimeKind.Utc).AddTicks(4760),
+                            BirthDate = new DateTime(2004, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6220),
+                            CreatedAt = new DateTime(2024, 5, 3, 20, 21, 32, 669, DateTimeKind.Utc).AddTicks(6220),
                             FullName = "Kadriye",
                             UserName = "User3"
                         });
