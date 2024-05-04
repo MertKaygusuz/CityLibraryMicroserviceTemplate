@@ -19,13 +19,16 @@ namespace BookServiceApi.ActionFilters.Classes
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             AssignBookToUserDto modelVal = context.ActionArguments["dto"] as AssignBookToUserDto;
-            var userExistTask = _userService.CheckIfUserExistsAsync(modelVal!.UserId);
-            var bookExistTask = _bookService.CheckIfBookExistsAsync(modelVal.BookId);
 
-            await Task.WhenAll(userExistTask, bookExistTask); //parallel request to db.
-            bool userExist = userExistTask.Result;
-            bool bookExist = bookExistTask.Result;
+            // following parallel requests are cancelled because AppDbContext's service life time is scoped. (can be used with transient scope in DI container but scoped is better for our cases)
+            // var userExistTask = _userService.CheckIfUserExistsAsync(modelVal!.UserId);
+            // var bookExistTask = _bookService.CheckIfBookExistsAsync(modelVal.BookId);
+            // await Task.WhenAll(userExistTask, bookExistTask); //parallel request to db.
+            // bool userExist = userExistTask.Result;
+            // bool bookExist = bookExistTask.Result;
 
+            bool userExist = await _userService.CheckIfUserExistsAsync(modelVal!.UserId);
+            bool bookExist = await _bookService.CheckIfBookExistsAsync(modelVal.BookId);
            
             if (!(userExist && bookExist))
             {

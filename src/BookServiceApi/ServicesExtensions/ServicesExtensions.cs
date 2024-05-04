@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Reflection;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.OpenApi.Models;
-using UserServiceApi.AppSettings;
+using BookServiceApi.AppSettings;
 using BookServiceApi.ContextRelated;
 using CityLibrary.Shared.MapperConfigurations;
 using CityLibrary.Shared.DbBase.SQL.UnitOfWorks;

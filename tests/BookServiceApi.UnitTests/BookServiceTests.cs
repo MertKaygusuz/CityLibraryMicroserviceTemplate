@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Moq;
 using MockQueryable.Moq;
-using UserServiceApi.AppSettings;
+using BookServiceApi.AppSettings;
 using System.Linq.Expressions;
 
 namespace BookServiceApi.UnitTests;

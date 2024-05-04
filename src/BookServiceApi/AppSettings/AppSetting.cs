@@ -1,4 +1,4 @@
-﻿namespace UserServiceApi.AppSettings
+﻿namespace BookServiceApi.AppSettings
 {
     public class AppSetting
     {
@@ -11,6 +11,8 @@
         public string BookReservationGrpcEndPoint { get; set; }
 
         public RabbitMq RabbitMqOptions { get; set; }
+
+        public string CurrentApplicationUrl { get; set; }
     }
 
     public class TokenOptions

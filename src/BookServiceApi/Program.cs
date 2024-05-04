@@ -4,7 +4,7 @@ using CityLibrary.Shared.Extensions.TokenExtensions;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Serilog;
-using UserServiceApi.AppSettings;
+using BookServiceApi.AppSettings;
 using BookServiceApi.ServicesExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -77,3 +77,4 @@ app.MapHealthChecks("/healthz");
 
 app.Run();
 
+public partial class Program {}

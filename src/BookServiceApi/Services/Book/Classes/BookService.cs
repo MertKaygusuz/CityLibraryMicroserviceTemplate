@@ -9,7 +9,7 @@ using BookServiceApi.Repositories.User;
 using BookServiceApi.Services.BookReservationApiService;
 using CityLibrary.Shared.SharedModels;
 using Microsoft.Extensions.Options;
-using UserServiceApi.AppSettings;
+using BookServiceApi.AppSettings;
 using MassTransit;
 using CityLibrary.Shared.SharedModels.QueueModels;
 using BookServiceApi.Services.BookReservationApiService.Grpc;

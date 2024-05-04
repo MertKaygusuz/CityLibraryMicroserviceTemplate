@@ -4,7 +4,7 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core.Interceptors;
 using Grpc.Net.Client;
 using Microsoft.Extensions.Options;
-using UserServiceApi.AppSettings;
+using BookServiceApi.AppSettings;
 
 namespace BookServiceApi.Services.BookReservationApiService.Grpc
 {
